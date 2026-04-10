@@ -26,15 +26,16 @@ function tagClass(tag: string): string {
 // Fetch all cases, group by slug (without lang suffix)
 const allCases = await getCollection("cases");
 
-// Derive slug by stripping .zh / .en suffix
-function baseSlug(id: string): string {
-  return id.replace(/\.(zh|en)$/, "");
+// Astro v5 glob loader strips dots from filenames: "dear-li-hua.zh" becomes "dear-li-huazh"
+// Use the lang frontmatter field to split instead
+function baseSlug(id: string, lang: string): string {
+  return id.slice(0, -lang.length); // e.g. "dear-li-huazh" - "zh" = "dear-li-hua"
 }
 
 // Group into { slug: { zh: entry, en: entry } }
 const grouped: Record<string, { zh?: typeof allCases[number]; en?: typeof allCases[number] }> = {};
 for (const entry of allCases) {
-  const slug = baseSlug(entry.id);
+  const slug = baseSlug(entry.id, entry.data.lang);
   if (!grouped[slug]) grouped[slug] = {};
   grouped[slug][entry.data.lang] = entry;
 }

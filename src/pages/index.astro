@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
+import WhatIDo from "../components/WhatIDo.astro";
 import Education from "../components/Education.astro";
 import CaseStudies from "../components/CaseStudies.astro";
 import ThinkingVault from "../components/ThinkingVault.astro";
@@ -30,13 +31,15 @@ import "../styles/global.css";
     <main>
       <!-- 1. 首页 Home -->
       <Hero />
-      <!-- 2. 教育与成果 Education & Achievements -->
+      <!-- 2. 能力地图 What I Do -->
+      <WhatIDo />
+      <!-- 3. 教育与成果 Education & Achievements -->
       <Education />
-      <!-- 3. 案例 Case Studies -->
+      <!-- 4. 案例 Case Studies -->
       <CaseStudies />
-      <!-- 4. 思考库 Thinking Vault -->
+      <!-- 5. 思考库 Thinking Vault -->
       <ThinkingVault />
-      <!-- 5. 联系 Contact -->
+      <!-- 6. 联系 Contact -->
       <Contact />
     </main>
     <Footer />

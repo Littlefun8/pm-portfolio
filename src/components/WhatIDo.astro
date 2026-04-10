@@ -1,0 +1,122 @@
+---
+import { siteConfig } from "../config";
+
+const section = siteConfig.whatIDo;
+---
+
+{
+  section && (
+    <section
+      id="what-i-do"
+      class="p-8 sm:p-12 md:p-16 lg:p-24 bg-gray-50"
+      style={`--accent-color: ${siteConfig.accentColor}`}
+    >
+      <div class="mb-10 lg:mb-14 whatido-reveal">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold text-gray-900">
+          {section.title}
+        </h2>
+        <p class="text-sm sm:text-base font-mono text-gray-400 mt-1">{section.titleEn}</p>
+        <div class="w-16 h-1 mt-3 rounded-full" style={`background-color: ${siteConfig.accentColor}`}></div>
+        <p class="mt-4 text-base text-gray-500 max-w-3xl">{section.intro}</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8 items-stretch">
+        <article class="lg:col-span-2 rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm whatido-reveal relative overflow-hidden">
+          <div
+            class="absolute -top-16 -right-16 w-44 h-44 rounded-full blur-3xl"
+            style={`background: color-mix(in srgb, ${siteConfig.accentColor} 20%, white)`}
+          ></div>
+          <div class="relative">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={`background: color-mix(in srgb, ${siteConfig.accentColor} 12%, white)`}>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style={`color: ${siteConfig.accentColor}`}>
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 4l0 16"></path>
+                <path d="M4 12l16 0"></path>
+                <path d="M4 7l4 0"></path>
+                <path d="M4 17l4 0"></path>
+                <path d="M16 7l4 0"></path>
+                <path d="M16 17l4 0"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900">AI PM / TPM Skill Stack</h3>
+            <p class="text-sm text-gray-600 mt-3 leading-relaxed">
+              从业务问题定义到 AI 能力落地，我关注可验证、可交付、可迭代的产品流程。
+            </p>
+            <div class="mt-5 flex flex-wrap gap-2">
+              {section.techStack.map((item) => (
+                <span class="px-2.5 py-1 rounded-full bg-gray-100 text-gray-600 text-xs font-medium">
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        </article>
+
+        <div class="lg:col-span-3 grid grid-cols-1 gap-4">
+          {section.capabilities.map((capability, index) => (
+            <article
+              class="rounded-2xl border border-gray-200 bg-white p-5 sm:p-6 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300 whatido-reveal"
+              style={`transition-delay: ${Math.min(index * 80, 220)}ms`}
+            >
+              <div class="flex items-start gap-3">
+                <span
+                  class="flex-shrink-0 mt-0.5 w-6 h-6 rounded-full text-[11px] font-bold flex items-center justify-center"
+                  style={`background: color-mix(in srgb, ${siteConfig.accentColor} 16%, white); color: ${siteConfig.accentColor}`}
+                >
+                  {index + 1}
+                </span>
+                <div>
+                  <h4 class="text-base sm:text-lg font-semibold text-gray-900">
+                    {capability.title}
+                  </h4>
+                  <p class="text-sm text-gray-600 mt-2 leading-relaxed">
+                    {capability.description}
+                  </p>
+                  <p class="text-xs font-mono text-gray-400 mt-3">
+                    #WhatIDo #{index + 1}
+                  </p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<script>
+  const revealNodes = document.querySelectorAll(".whatido-reveal");
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries, io) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          io.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    revealNodes.forEach((node) => observer.observe(node));
+  } else {
+    revealNodes.forEach((node) => node.classList.add("is-visible"));
+  }
+</script>
+
+<style>
+  .whatido-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+
+  .whatido-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+

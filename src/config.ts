@@ -1,17 +1,13 @@
 export const siteConfig = {
-  name: "你好，我是 L",
-  nameEn: "Hi, I'm L",
+  name: "你好，我是 徐帆",
+  nameEn: "Hi, I'm XuFan",
   title: "AI PM / TPM 求职者",
   titleEn: "AI PM / TPM Candidate",
   description:
     "江西财经大学 2026 届软件工程本科生，目标岗位 AI 产品经理 / 技术产品经理，擅长 AI Native 工作流设计与产品闭环实践。",
   accentColor: "#2563eb",
   social: {
-    // TODO: 替换为真实邮箱
-    email: "your-email@example.com",
-    // TODO: 替换为真实 LinkedIn 主页
-    linkedin: "https://linkedin.com/in/yourprofile",
-    // TODO: 替换为真实 GitHub 主页
+    email: "xufun98@gmail.com",
     github: "https://github.com/Littlefun8",
     // 微信二维码图片路径，放于 public/assets/wechat-qr.png 后替换占位
     wechat: "/assets/wechat-qr-placeholder.png",
@@ -19,13 +15,51 @@ export const siteConfig = {
     resumeUrl: "/assets/resume-placeholder.pdf",
   },
   hero: {
-    greeting: "你好，我是 L",
+    greeting: "你好，我是 徐帆",
+    greetingEn: "Hi, I'm XuFan",
     identity: "软件工程 → AI PM / TPM",
+    identityEn: "Software Engineering → AI PM / TPM",
     targetRole: "目标岗位：AI 产品经理 / 技术产品经理",
+    targetRoleEn: "Target: AI Product Manager / Technical Product Manager",
     coreAbility:
       "核心能力：AI Native 工作流编排 × 产品全闭环思维 × 结构化问题拆解",
-    tagline:
-      "从软件工程到 AI PM — 用工程师的严谨，做产品经理的闭环。",
+    coreAbilityEn:
+      "Core: AI-Native Workflow Orchestration × Full Product Lifecycle × Structured Problem Decomposition",
+    tagline: "Make products from an engineering perspective.",
+  },
+  whatIDo: {
+    title: "我在做什么",
+    titleEn: "What I Do",
+    intro:
+      "聚焦 AI PM / TPM 岗位所需的产品与技术交叉能力：从问题定义、方案编排到可落地交付。",
+    capabilities: [
+      {
+        title: "AI Native 产品设计",
+        description:
+          "围绕真实场景拆解用户旅程，设计 AI 功能闭环（输入-处理-反馈-迭代），把模型能力转化为用户价值。",
+      },
+      {
+        title: "多模型工作流编排",
+        description:
+          "基于 LangChain/LangGraph 设计 Tool Calling 流程，建立主链路 + 降级链路 + 可观测日志，提升稳定性。",
+      },
+      {
+        title: "AI-Native 研发协作",
+        description:
+          "使用 Cursor + Claude Code 进行结构化 Prompt 驱动开发，结合 FSD/PRD 保持需求、实现与验收一致。",
+      },
+    ],
+    techStack: [
+      "LangChain",
+      "LangGraph",
+      "RAG",
+      "FastAPI",
+      "Spring Boot",
+      "微信小程序",
+      "Prompt Engineering",
+      "Docker",
+      "Cloudflare",
+    ],
   },
   education: {
     school: "江西财经大学",
@@ -33,22 +67,22 @@ export const siteConfig = {
     degree: "软件工程 本科（2022 — 2026）",
     degreeEn: "B.Eng. in Software Engineering",
     highlights: [
-      "GPA：待更新（替换此处）",
-      "主修方向：软件工程 / 人工智能应用",
-      "课程涵盖：数据结构、操作系统、数据库、机器学习基础",
+      "加权平均成绩：93.02 | 专业排名：前 1%",
+      "核心课程：Python与人工智能进阶(98)、软件工程综合实训(98)、J2EE程序设计(98)、用户体验设计(90)",
+      "通过 CET-6",
     ],
     milestones: [
       {
-        label: "自学实践",
-        desc: "系统学习 n8n 工作流编排、RAG 架构、多模态 API 调用",
+        label: "竞赛荣誉",
+        desc: "累计国家级 4 项、省级 3 项、校级 6 项 — 含服务外包创新大赛国赛三等奖、校学业奖学金(连续两年)",
       },
       {
-        label: "产品思维",
-        desc: "持续输出结构化产品笔记（PM 方法论、竞品分析、需求拆解）",
+        label: "AI 实践",
+        desc: "系统学习 LangChain Agent、RAG 架构、Prompt Engineering、n8n 工作流编排与多模态 API 集成",
       },
       {
-        label: "证书 / 里程碑",
-        desc: "待补充（替换此处，例如：某 AI 产品课结业证书、黑客松奖项等）",
+        label: "内容影响力",
+        desc: "校院团委公众号供稿，阅读量达账号平均值 2 倍以上，最高单篇 1.8 万",
       },
     ],
   },
@@ -57,32 +91,32 @@ export const siteConfig = {
       id: "dear-li-hua",
       name: "DearLiHua",
       nameEn: "DearLiHua — AI English Essay Coach",
-      tagline: "让高考英语作文批改从 3 天缩短到 3 分钟",
-      tags: ["多模态 AI", "微信小程序", "OCR", "Prompt 工程"],
+      tagline: "让高考英语作文批改从 5 分钟缩短到 30 秒，评分准确率 93%",
+      tags: ["LangChain Agent", "微信小程序", "OCR", "RAG", "Prompt 工程"],
       context: {
         summary:
-          "高中生英语作文批改依赖人工，反馈周期长、颗粒度低。DearLiHua 是一款基于微信小程序的 AI 英语作文批改工具，通过 OCR 拍题 + 多模态大模型实现秒级精细化反馈。",
+          "面向高中英语教师的 AI 作文批改工具。通过 OCR 识别 + RAG 范文检索 + LLM 评分，实现从拍照到多层级批改报告的端到端自动化。覆盖 6 个功能模块、4Tab + 6 子页面的完整微信小程序 MVP。",
         problem:
-          "核心痛点：学生写完作文后平均等待 3 天才能收到老师反馈，且反馈多为笼统评语，缺乏可操作的改进建议。",
-        users: "目标用户：备战高考的高中生；次级用户：英语老师（减负）",
+          "核心痛点：单次批改耗时 5-10 分钟，一个班 50 人需 4-8 小时；反馈多为笼统评语，缺乏可操作的逐句改进建议。",
+        users: "目标用户：高中英语教师（减负提效）；次级用户：备战高考的高中生（获取精细化反馈）",
         stage:
-          "阶段：原型验证阶段，已完成微信小程序 MVP 开发并在校内小范围测试",
+          "阶段：已完成微信小程序 MVP 开发，基于 FastAPI 构建独立 AI 服务，Docker 容器化部署",
       },
       decisions: [
         {
-          title: "问题定义",
+          title: "问题定义与产品拆解",
           content:
-            "通过访谈 12 位高中生，发现批改延迟和反馈颗粒度不足是最高频痛点。将「让 AI 批改作文」拆解为：识别手写文字（OCR）→ 理解评分标准（Prompt 设计）→ 生成可操作反馈（输出结构化建议）。",
+            "通过教师访谈发现批改效率的核心瓶颈，将「AI 批改作文」拆解为 5 个 Agent 工具调用：OCR 识别 → RAG 范文检索 → LLM 评分 → 语法检查 → 句型改写。输出完整 PRD（含 6 个功能模块、数据结构、API 接口规范、UI 规范）。",
         },
         {
-          title: "关键决策：选择 OCR + 多模态路径",
+          title: "技术决策：LangChain Agent + LangGraph 状态机",
           content:
-            "初版用纯文字输入，用户留存低（学生不愿手动录入）。改为相机拍照 → OCR 识别 → 大模型批改，显著降低使用门槛。OCR 准确率问题通过 Prompt 增加容错指令解决（「忽略识别错误的字，聚焦语法与逻辑」）。",
+            "设计基于 LangChain Tool-Calling Agent 的批改系统，用 LangGraph 构建 7 个状态节点的批改工作流，实现 OCR 置信度自动分支路由（< 0.7 自动降级）。Agent 自主决策工具调用顺序，替代硬编码流程，提升批改可靠性。",
         },
         {
-          title: "工作流逻辑",
+          title: "RAG 知识库 + Prompt 工程",
           content:
-            "用户拍照上传 → OCR 服务提取文字 → 结构化 Prompt（包含高考评分维度：内容/语言/书写）→ 大模型生成批改报告 → 前端分层展示（总分 + 各维度分析 + 逐句建议）。降级策略：OCR 置信度低于阈值时，提示用户重新拍照或手动输入。",
+            "构建 30+ 篇高分范文向量知识库（Sentence-Transformers + ChromaDB），批改时自动注入 Top-3 相似范文作为评分锚点。Prompt 采用 CoT（先分析后评分）+ Few-shot（注入范文示例）+ 三维 Rubric（完整性/内容/语言），评分准确率达 93%。",
         },
       ],
       artifacts: [
@@ -99,10 +133,10 @@ export const siteConfig = {
           note: "待替换为 Axure Cloud 链接",
         },
         {
-          type: "分析",
-          label: "竞品分析",
-          url: "#todo-dear-li-hua-competitive",
-          note: "待替换为分析报告链接",
+          type: "演示",
+          label: "小程序演示",
+          url: "#todo-dear-li-hua-demo",
+          note: "待替换为小程序体验链接/前端可交互展示",
         },
       ],
     },
@@ -110,33 +144,33 @@ export const siteConfig = {
       id: "jiangcai-referral",
       name: "酱菜内推系统",
       nameEn: "JiangCai Campus Referral System",
-      tagline: "将校园内推从微信群接龙升级为结构化信息匹配平台",
-      tags: ["全栈开发", "用户调研", "需求优先级", "校园场景"],
+      tagline: "AI-Native 开发实践：用 Cursor + Claude Code 将原型到产品的效率提升 60%",
+      tags: ["AI-Native 开发", "微信小程序", "需求迭代", "Cursor", "校园场景"],
       context: {
         summary:
-          "校园内推信息散落在各类微信群，信息噪声高、匹配效率低。酱菜内推系统将内推需求和求职意向结构化，实现精准匹配，并提供内推进度追踪。",
+          "针对校园内推信息散落微信群、匹配效率低的痛点，从 0 到 1 孵化校园内推系统。核心流程「校友发布 → 老师审核 → 学生申请」，采用 Cursor + Claude Code 的 AI 驱动开发工作流，验证了 AI-Native 开发在实际项目中的可行性。",
         problem:
-          "核心痛点：内推信息在微信群中快速沉没，求职者需反复翻找；推荐人缺乏有效工具管理内推进度，导致有效内推率低。",
+          "核心痛点：内推信息在微信群中快速沉没，求职者需反复翻找；传统招聘平台信息不对称严重，校园场景缺乏垂直化解决方案。",
         users:
           "目标用户：有内推需求的在校生（求职方）；有内推名额的校友/在职员工（推荐方）",
         stage:
-          "阶段：已完成核心功能开发，在校内小范围上线运营，积累初步用户反馈",
+          "阶段：已完成核心功能开发（6 个页面），前端使用 mock 数据，云函数已编写",
       },
       decisions: [
         {
-          title: "问题定义",
+          title: "产品定位：从通用招聘收束至校园内推",
           content:
-            "调研 20+ 名有求职经历的同学，绘制「信息获取 → 联系推荐人 → 等待反馈」全链路，识别出 3 个高摩擦节点：信息查找、意向匹配、进度追踪。",
+            "调研发现传统招聘平台在校园场景中信息不对称严重。将产品范围从通用招聘收束至校园内推垂直场景，设计「校友发布 → 老师审核 → 学生申请」核心业务流程。增加岗位内推寄语、学生关联信息等差异化功能，突出校园社交信任链。",
         },
         {
-          title: "关键决策：先做最小可行匹配，不做算法推荐",
+          title: "AI-Native 开发工作流",
           content:
-            "初期资源有限，放弃复杂算法，选择结构化标签筛选（城市/岗位/学校）+ 主动联系机制。这降低了开发复杂度，同时让推荐人保持主动权，提升内推意愿。",
+            "以 Axure 高保真原型为输入，使用 Cursor + Claude Code 进行 AI 驱动开发。通过结构化 Prompt（LangGPT）和功能规格文档（FSD），采用「结构化输入 + 小步迭代 + 持续对齐」策略分模块实现前后端，开发效率提升约 60%。主导演程：原型设计 → Prompt 工程 → 代码生成 → Git 版本控制。",
         },
         {
-          title: "需求优先级决策",
+          title: "需求迭代与优先级",
           content:
-            "采用 RICE 评分框架对 15 个候选功能排优先级。内推帖发布、标签筛选、消息通知排前三，简历展示和数据统计延后到 V2。该决策基于用户访谈中「能快速找到对口内推机会」的核心诉求。",
+            "主导 3 轮需求迭代，基于用户反馈持续优化。初版聚焦核心发布-申请流程；V2 增加内推寄语和关联信息；V3 规划教师背书审核和数据统计。每轮迭代基于真实使用场景，而非假设需求。",
         },
       ],
       artifacts: [
@@ -148,15 +182,15 @@ export const siteConfig = {
         },
         {
           type: "原型",
-          label: "产品原型",
+          label: "Axure 原型",
           url: "#todo-jiangcai-prototype",
-          note: "待替换为原型链接",
+          note: "待替换为 Axure Cloud 链接",
         },
         {
-          type: "调研",
-          label: "用户调研报告",
-          url: "#todo-jiangcai-research",
-          note: "待替换为调研报告链接",
+          type: "代码",
+          label: "GitHub 仓库",
+          url: "https://github.com/Littlefun8?tab=repositories",
+          note: "微信小程序源码 + 云函数",
         },
       ],
     },
@@ -164,53 +198,53 @@ export const siteConfig = {
       id: "easyfit-ai",
       name: "EasyFit-AI",
       nameEn: "EasyFit-AI — AI Orchestration Experiment",
-      tagline: "AI 编排实验案例：虚拟试衣的多 API 链路设计与稳定性实践",
-      tags: ["AI 编排", "图像生成", "API 链路", "降级策略", "TPM 视角"],
+      tagline: "多 API 协同编排：Gemini 图像理解 × Browser Use 商品提取 × 三层降级策略",
+      tags: ["AI 编排", "Spring Boot", "Gemini API", "图像生成", "Browser Use"],
       context: {
         summary:
-          "EasyFit-AI 是一个 AI 编排实验项目，以「虚拟试衣」为场景，系统探索多 API 协同调用、链路降级、重试机制与部署稳定性。核心价值在于编排逻辑设计，而非单一 AI 效果展示。",
+          "以「虚拟试衣」为场景的 AI 编排实验项目。集成 Google Gemini 多模态 API + Browser Use 自动化，实现三个独立 Tab 的功能链路：试穿提示词生成、商品图提取、背景提示词分析。部署在 Hugging Face Spaces + Cloudflare Worker。",
         problem:
-          "核心命题：如何让多个 AI API（图像理解 + 服装生成 + 结果优化）在生产级链路中稳定协同？错误处理、降级路径、用户体验一致性是关键挑战。",
+          "核心命题：如何让多个 AI API（图像理解 + 服装提取 + 结果优化）在生产级链路中稳定协同？重点在编排逻辑与降级策略，而非单一 AI 效果。",
         users:
-          "实验对象：电商场景下的虚拟试衣需求；深层目标：验证 AI 编排能力可迁移性",
+          "实验对象：电商虚拟试衣场景；深层目标：验证 AI 编排能力在多业务场景的可迁移性",
         stage:
-          "阶段：AI 编排实验阶段，核心链路已跑通，正在迭代降级策略与用户反馈闭环",
+          "阶段：核心三链路已跑通，在线可用 (api.littlefun8.me)，正在迭代降级策略",
       },
       decisions: [
         {
-          title: "问题定义：编排复杂度而非效果复杂度",
+          title: "架构设计：三 Tab 独立链路 + 共享模型层",
           content:
-            "市场上已有成熟的图像生成模型，竞争焦点不在于「生成质量」，而在于「如何让多模型协同更可靠」。将问题重新定义为：设计一套可观测、可降级、可重试的 AI API 编排链路。",
+            "Tab 1（试穿提示词）和 Tab 3（背景分析）共享 Gemini 文生文服务；Tab 2（商品图提取）走双通道 — Gemini 图生图为主，Browser Use + 豆包为备选。Spring Boot 后端统一管理 API Key、代理配置和重试逻辑，前端响应式 HTML/CSS/JS。",
         },
         {
-          title: "关键决策：三层降级策略",
+          title: "三层降级策略",
           content:
-            "主链路：VTON 专用模型生成试衣图。降级 1：主模型超时 > 5s，切换为通用图像合成 API。降级 2：通用 API 失败，返回占位图 + 提示用户重试。每层降级均记录日志，用于后续迭代优化。",
+            "主链路：Gemini 图生图（gemini-2.5-flash-image）。降级 1：主模型超时 > 5s，切换 gemini-3-pro-image-preview。降级 2：全部失败，返回占位图 + 提示用户重试。图生图原理：responseModalities(\"TEXT\",\"IMAGE\") → 从 response.parts() 提取 inlineData。每层降级均记录日志。",
         },
         {
-          title: "工作流逻辑与部署链路",
+          title: "部署与稳定性实践",
           content:
-            "用户上传服装图 + 人像图 → 图像预处理（尺寸归一化）→ VTON API 调用 → 结果质量校验（置信度阈值）→ 合格则返回，不合格则触发重试或降级 → 最终结果展示 + 用户反馈收集。部署使用 Docker 容器化，API 密钥通过环境变量注入，避免硬编码。",
+            "Docker 容器化部署到 Hugging Face Spaces（端口 7860），通过 Cloudflare Worker 反代至 api.littlefun8.me。API 密钥通过 HF Secrets 环境变量注入，避免硬编码。图片存储使用 Cloudflare R2。团队密码认证 + 内存 Token 机制（支持 Bypass 模式）。",
         },
       ],
       artifacts: [
         {
-          type: "架构",
-          label: "系统架构图",
-          url: "#todo-easyfit-architecture",
-          note: "待替换为架构图链接（Excalidraw/Figma）",
+          type: "在线",
+          label: "在线演示",
+          url: "https://api.littlefun8.me",
+          note: "Hugging Face Spaces + Cloudflare Worker 部署",
         },
         {
-          type: "PRD",
-          label: "PRD 文档",
-          url: "#todo-easyfit-prd",
-          note: "待替换为 PRD 链接",
+          type: "代码",
+          label: "GitHub 仓库",
+          url: "https://github.com/Littlefun8?tab=repositories",
+          note: "Spring Boot 后端 + 前端",
         },
         {
-          type: "演示",
-          label: "演示视频 / Demo",
-          url: "#todo-easyfit-demo",
-          note: "待替换为演示链接",
+          type: "文档",
+          label: "设计文档",
+          url: "#todo-easyfit-design-docs",
+          note: "待替换为设计文档链接",
         },
       ],
     },

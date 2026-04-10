@@ -1,0 +1,255 @@
+---
+import { siteConfig } from "../config";
+---
+
+<section
+  id="contact"
+  class="p-8 sm:p-12 md:p-16 lg:p-24 bg-gray-50"
+  style={`--accent-color: ${siteConfig.accentColor}`}
+>
+  <!-- Section heading -->
+  <div class="mb-10 lg:mb-14">
+    <h2 class="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold text-gray-900">
+      联系
+    </h2>
+    <p class="text-sm sm:text-base font-mono text-gray-400 mt-1">Contact</p>
+    <div
+      class="w-16 h-1 mt-3 rounded-full"
+      style={`background-color: ${siteConfig.accentColor}`}
+    >
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+    <!-- Note + CTA -->
+    <div class="lg:col-span-5">
+      <p class="text-lg text-gray-600 leading-relaxed mb-8">
+        {siteConfig.contact.note}
+      </p>
+
+      <!-- Resume download -->
+      <a
+        href={siteConfig.contact.resumeUrl}
+        download
+        class="inline-flex items-center gap-3 px-6 py-4 rounded-xl font-semibold text-white transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5 hover:shadow-lg mb-6"
+        style={`background-color: ${siteConfig.accentColor}`}
+      >
+        <svg
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+          ></path>
+        </svg>
+        {siteConfig.contact.resumeLabel}
+      </a>
+      <p class="text-xs text-gray-400 font-mono">
+        （注：简历为占位链接，替换方式见 README）
+      </p>
+    </div>
+
+    <!-- Contact channels -->
+    <div class="lg:col-span-7">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Email -->
+        {
+          siteConfig.social?.email && (
+            <a
+              href={`mailto:${siteConfig.social.email}`}
+              class="flex items-center gap-4 p-5 bg-white rounded-xl border border-gray-200 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group"
+            >
+              <div
+                class="w-10 h-10 rounded-lg flex items-center justify-center text-white flex-shrink-0"
+                style={`background-color: ${siteConfig.accentColor}`}
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <p class="text-xs font-mono text-gray-400">邮箱 Email</p>
+                <p class="text-sm font-medium text-gray-800 group-hover:text-gray-900 break-all">
+                  {siteConfig.social.email}
+                </p>
+                <p class="text-[10px] text-gray-400 italic">（替换为真实邮箱）</p>
+              </div>
+            </a>
+          )
+        }
+
+        <!-- GitHub -->
+        {
+          siteConfig.social?.github && (
+            <a
+              href={siteConfig.social.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-4 p-5 bg-white rounded-xl border border-gray-200 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group"
+            >
+              <div class="w-10 h-10 rounded-lg flex items-center justify-center bg-gray-900 text-white flex-shrink-0">
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+                  />
+                </svg>
+              </div>
+              <div>
+                <p class="text-xs font-mono text-gray-400">GitHub</p>
+                <p class="text-sm font-medium text-gray-800 group-hover:text-gray-900">
+                  Littlefun8
+                </p>
+                <p class="text-[10px] text-gray-400 italic">（替换为真实 GitHub）</p>
+              </div>
+            </a>
+          )
+        }
+
+        <!-- LinkedIn -->
+        {
+          siteConfig.social?.linkedin && (
+            <a
+              href={siteConfig.social.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-4 p-5 bg-white rounded-xl border border-gray-200 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group"
+            >
+              <div
+                class="w-10 h-10 rounded-lg flex items-center justify-center text-white flex-shrink-0"
+                style="background-color: #0A66C2"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 11v5M8 8v.01M12 16v-5M16 16v-3a2 2 0 1 0-4 0M3 7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <p class="text-xs font-mono text-gray-400">LinkedIn</p>
+                <p class="text-sm font-medium text-gray-800 group-hover:text-gray-900">
+                  查看主页
+                </p>
+                <p class="text-[10px] text-gray-400 italic">（替换为真实 LinkedIn）</p>
+              </div>
+            </a>
+          )
+        }
+
+        <!-- WeChat -->
+        <div
+          class="flex items-center gap-4 p-5 bg-white rounded-xl border border-gray-200 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 cursor-pointer group"
+          id="contact-wechat-btn"
+        >
+          <div
+            class="w-10 h-10 rounded-lg flex items-center justify-center text-white flex-shrink-0"
+            style="background-color: #07C160"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M16.5 10c3.038 0 5.5 2.015 5.5 4.5c0 1.397-.778 2.645-2 3.47v2.03l-1.964-1.178a6.649 6.649 0 01-1.536.178c-3.038 0-5.5-2.015-5.5-4.5s2.462-4.5 5.5-4.5z M11.197 15.698c-.69.21-1.43.302-2.197.302a8.008 8.008 0 01-2.402-.372l-2.598 1.372v-2.538C2.803 13.435 2 11.942 2 10.3 2 6.986 4.904 4.3 8.5 4.3c3.357 0 6.055 2.387 6.463 5.488"
+              ></path>
+            </svg>
+          </div>
+          <div>
+            <p class="text-xs font-mono text-gray-400">微信 WeChat</p>
+            <p class="text-sm font-medium text-gray-800 group-hover:text-gray-900">
+              点击查看二维码
+            </p>
+            <p class="text-[10px] text-gray-400 italic">（占位，替换真实二维码）</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- WeChat QR modal -->
+      <div
+        id="contact-wechat-modal"
+        class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+      >
+        <div class="bg-white rounded-2xl p-8 shadow-2xl max-w-xs w-full mx-4 relative">
+          <button
+            id="contact-wechat-close"
+            class="absolute top-3 right-3 p-1.5 rounded-lg hover:bg-gray-100 transition-colors text-gray-400"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <h3 class="text-base font-bold text-gray-900 mb-1 text-center">微信扫码联系</h3>
+          <p class="text-xs text-gray-400 text-center mb-4">WeChat QR Code</p>
+          <div class="w-48 h-48 mx-auto bg-gray-100 rounded-xl flex flex-col items-center justify-center text-gray-400 text-sm text-center gap-2">
+            <svg class="w-12 h-12 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <rect x="3" y="3" width="7" height="7" rx="1" stroke-width="2"/>
+              <rect x="14" y="3" width="7" height="7" rx="1" stroke-width="2"/>
+              <rect x="3" y="14" width="7" height="7" rx="1" stroke-width="2"/>
+              <path d="M14 14h.01M18 14h.01M14 18h.01M18 18h.01" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span class="text-xs">二维码占位图</span>
+            <span class="text-[10px] text-gray-300">替换为真实二维码</span>
+          </div>
+          <p class="text-[10px] text-gray-400 mt-4 text-center font-mono">
+            将真实二维码放至<br/><code>/public/assets/wechat-qr.png</code>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const contactWechatBtn = document.getElementById("contact-wechat-btn");
+  const contactWechatModal = document.getElementById("contact-wechat-modal");
+  const contactWechatClose = document.getElementById("contact-wechat-close");
+
+  contactWechatBtn?.addEventListener("click", () => {
+    contactWechatModal?.classList.remove("hidden");
+  });
+
+  contactWechatClose?.addEventListener("click", () => {
+    contactWechatModal?.classList.add("hidden");
+  });
+
+  contactWechatModal?.addEventListener("click", (e) => {
+    if (e.target === contactWechatModal) {
+      contactWechatModal.classList.add("hidden");
+    }
+  });
+</script>

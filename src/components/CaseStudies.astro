@@ -1,0 +1,250 @@
+---
+import { siteConfig } from "../config";
+const cases = siteConfig.caseStudies;
+
+const tagColors: Record<string, string> = {
+  "多模态 AI": "bg-purple-100 text-purple-700",
+  "微信小程序": "bg-green-100 text-green-700",
+  "OCR": "bg-yellow-100 text-yellow-700",
+  "Prompt 工程": "bg-pink-100 text-pink-700",
+  "全栈开发": "bg-blue-100 text-blue-700",
+  "用户调研": "bg-orange-100 text-orange-700",
+  "需求优先级": "bg-teal-100 text-teal-700",
+  "校园场景": "bg-lime-100 text-lime-700",
+  "AI 编排": "bg-indigo-100 text-indigo-700",
+  "图像生成": "bg-rose-100 text-rose-700",
+  "API 链路": "bg-cyan-100 text-cyan-700",
+  "降级策略": "bg-amber-100 text-amber-700",
+  "TPM 视角": "bg-violet-100 text-violet-700",
+  "稳定性": "bg-slate-100 text-slate-700",
+};
+
+function tagClass(tag: string): string {
+  return tagColors[tag] ?? "bg-gray-100 text-gray-700";
+}
+---
+
+<section
+  id="case-studies"
+  class="p-8 sm:p-12 md:p-16 lg:p-24 bg-gray-50"
+  style={`--accent-color: ${siteConfig.accentColor}`}
+>
+  <!-- Section heading -->
+  <div class="mb-10 lg:mb-14">
+    <h2 class="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold text-gray-900">
+      案例
+    </h2>
+    <p class="text-sm sm:text-base font-mono text-gray-400 mt-1">
+      Case Studies
+    </p>
+    <div
+      class="w-16 h-1 mt-3 rounded-full"
+      style={`background-color: ${siteConfig.accentColor}`}
+    >
+    </div>
+    <p class="mt-4 text-base text-gray-500 max-w-2xl">
+      三个从真实痛点出发的产品实践案例，展示"问题定义 → 关键决策 → 产出闭环"的 AI PM 思维链路。
+    </p>
+  </div>
+
+  <!-- Case study cards -->
+  <div class="space-y-6">
+    {
+      cases.map((cs, index) => (
+        <div
+          class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300"
+          id={`case-card-${cs.id}`}
+        >
+          {/* Card header */}
+          <div class="p-6 sm:p-8">
+            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-2">
+                  <span
+                    class="text-xs font-mono font-bold"
+                    style={`color: ${siteConfig.accentColor}`}
+                  >
+                    0{index + 1}
+                  </span>
+                  <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
+                    {cs.name}
+                  </h3>
+                </div>
+                <p class="text-xs font-mono text-gray-400 mb-3">{cs.nameEn}</p>
+                <p class="text-base text-gray-600 leading-relaxed font-medium">
+                  {cs.tagline}
+                </p>
+                <div class="flex flex-wrap gap-2 mt-4">
+                  {cs.tags.map((tag) => (
+                    <span
+                      class={`px-2.5 py-1 rounded-full text-xs font-medium ${tagClass(tag)}`}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <button
+                class="case-toggle flex-shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border transition-all duration-200 hover:-translate-y-0.5"
+                data-target={`case-detail-${cs.id}`}
+                style={`border-color: ${siteConfig.accentColor}; color: ${siteConfig.accentColor}`}
+              >
+                查看详情
+                <svg
+                  class="toggle-arrow w-4 h-4 transition-transform duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          {/* Expandable detail panel */}
+          <div
+            id={`case-detail-${cs.id}`}
+            class="case-detail hidden border-t border-gray-100"
+          >
+            <div class="p-6 sm:p-8 space-y-8">
+              {/* Layer 1: Context */}
+              <div>
+                <h4
+                  class="text-xs font-mono font-bold uppercase tracking-widest mb-4 flex items-center gap-2"
+                  style={`color: ${siteConfig.accentColor}`}
+                >
+                  <span class="w-5 h-5 rounded-full text-white flex items-center justify-center text-[10px] font-bold" style={`background-color: ${siteConfig.accentColor}`}>1</span>
+                  Context — 概览
+                </h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div class="bg-gray-50 rounded-xl p-4">
+                    <p class="text-xs font-mono text-gray-400 mb-1">项目概述</p>
+                    <p class="text-sm text-gray-700 leading-relaxed">
+                      {cs.context.summary}
+                    </p>
+                  </div>
+                  <div class="space-y-3">
+                    <div class="bg-gray-50 rounded-xl p-4">
+                      <p class="text-xs font-mono text-gray-400 mb-1">核心痛点</p>
+                      <p class="text-sm text-gray-700 leading-relaxed">
+                        {cs.context.problem}
+                      </p>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4">
+                      <p class="text-xs font-mono text-gray-400 mb-1">用户</p>
+                      <p class="text-sm text-gray-700 leading-relaxed">
+                        {cs.context.users}
+                      </p>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-4">
+                      <p class="text-xs font-mono text-gray-400 mb-1">项目阶段</p>
+                      <p class="text-sm text-gray-700 leading-relaxed">
+                        {cs.context.stage}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Layer 2: Decisions */}
+              <div>
+                <h4
+                  class="text-xs font-mono font-bold uppercase tracking-widest mb-4 flex items-center gap-2"
+                  style={`color: ${siteConfig.accentColor}`}
+                >
+                  <span class="w-5 h-5 rounded-full text-white flex items-center justify-center text-[10px] font-bold" style={`background-color: ${siteConfig.accentColor}`}>2</span>
+                  Decisions — 问题定义与关键决策
+                </h4>
+                <div class="space-y-4">
+                  {cs.decisions.map((d, di) => (
+                    <div class="border-l-2 pl-4" style={`border-color: ${siteConfig.accentColor}`}>
+                      <h5 class="text-sm font-semibold text-gray-900 mb-1">
+                        {d.title}
+                      </h5>
+                      <p class="text-sm text-gray-600 leading-relaxed">
+                        {d.content}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Layer 3: Artifacts */}
+              <div>
+                <h4
+                  class="text-xs font-mono font-bold uppercase tracking-widest mb-4 flex items-center gap-2"
+                  style={`color: ${siteConfig.accentColor}`}
+                >
+                  <span class="w-5 h-5 rounded-full text-white flex items-center justify-center text-[10px] font-bold" style={`background-color: ${siteConfig.accentColor}`}>3</span>
+                  Artifacts — 产出文档
+                </h4>
+                <div class="flex flex-wrap gap-3">
+                  {cs.artifacts.map((art) => (
+                    <a
+                      href={art.url}
+                      class="group inline-flex flex-col gap-1 px-4 py-3 bg-gray-50 hover:bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all duration-200"
+                    >
+                      <span class="text-xs font-mono text-gray-400">
+                        {art.type}
+                      </span>
+                      <span class="text-sm font-medium text-gray-800 group-hover:text-gray-900">
+                        {art.label}
+                      </span>
+                      {art.note && (
+                        <span class="text-[10px] text-gray-400 italic">
+                          {art.note}
+                        </span>
+                      )}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll(".case-toggle").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const targetId = (btn as HTMLElement).dataset.target;
+      if (!targetId) return;
+      const detail = document.getElementById(targetId);
+      if (!detail) return;
+
+      const isHidden = detail.classList.contains("hidden");
+      detail.classList.toggle("hidden", !isHidden);
+
+      const arrow = btn.querySelector(".toggle-arrow");
+      arrow?.classList.toggle("rotate-180", isHidden);
+
+      const btnEl = btn as HTMLElement;
+      btnEl.textContent = "";
+      const label = document.createTextNode(isHidden ? "收起" : "查看详情");
+      btnEl.appendChild(label);
+
+      // Re-append arrow
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("class", `toggle-arrow w-4 h-4 transition-transform duration-300${isHidden ? " rotate-180" : ""}`);
+      svg.setAttribute("fill", "none");
+      svg.setAttribute("stroke", "currentColor");
+      svg.setAttribute("viewBox", "0 0 24 24");
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("stroke-linecap", "round");
+      path.setAttribute("stroke-linejoin", "round");
+      path.setAttribute("stroke-width", "2");
+      path.setAttribute("d", "M19 9l-7 7-7-7");
+      svg.appendChild(path);
+      btnEl.appendChild(svg);
+    });
+  });
+</script>

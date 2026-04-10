@@ -1,73 +1,129 @@
 ---
 import { siteConfig } from "../config";
 
-const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
-const hasExperience = siteConfig.experience && siteConfig.experience.length > 0;
-const hasEducation = siteConfig.education && siteConfig.education.length > 0;
+const navItems = [
+  { href: "#home", label: "首页", labelEn: "Home" },
+  { href: "#education", label: "教育与成果", labelEn: "Education & Achievements" },
+  { href: "#case-studies", label: "案例", labelEn: "Case Studies" },
+  { href: "#thinking-vault", label: "思考库", labelEn: "Thinking Vault" },
+  { href: "#contact", label: "联系", labelEn: "Contact" },
+];
 ---
 
 <header
   id="header"
-  class="fixed top-0 left-0 right-0 z-50 hidden md:block transition-all duration-300"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
 >
-  <nav class="max-w-7xl mx-auto px-8 py-4">
-    <ul class="flex items-center gap-8 justify-center">
-      <li>
-        <a
-          href="#about"
-          class="text-gray-700 hover:text-black transition-colors font-medium"
-        >
-          About
-        </a>
-      </li>
+  <!-- Desktop nav -->
+  <nav class="hidden md:block max-w-7xl mx-auto px-8 py-4">
+    <ul class="flex items-center gap-6 justify-center">
       {
-        hasProjects && (
+        navItems.map((item) => (
           <li>
             <a
-              href="#projects"
-              class="text-gray-700 hover:text-black transition-colors font-medium"
+              href={item.href}
+              class="nav-link group flex flex-col items-center text-gray-700 hover:text-black transition-colors"
             >
-              Projects
+              <span class="font-medium text-sm">{item.label}</span>
+              <span class="text-[10px] text-gray-400 group-hover:text-gray-500 transition-colors leading-tight">
+                {item.labelEn}
+              </span>
             </a>
           </li>
-        )
-      }
-      {
-        hasExperience && (
-          <li>
-            <a
-              href="#experience"
-              class="text-gray-700 hover:text-black transition-colors font-medium"
-            >
-              Experience
-            </a>
-          </li>
-        )
-      }
-      {
-        hasEducation && (
-          <li>
-            <a
-              href="#education"
-              class="text-gray-700 hover:text-black transition-colors font-medium"
-            >
-              Education
-            </a>
-          </li>
-        )
+        ))
       }
     </ul>
+  </nav>
+
+  <!-- Mobile nav -->
+  <nav class="md:hidden px-4 py-3">
+    <div class="flex items-center justify-between">
+      <span class="font-semibold text-gray-800 text-sm"
+        >{siteConfig.title}</span
+      >
+      <button
+        id="mobile-menu-btn"
+        aria-label="打开菜单"
+        class="p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+      >
+        <svg
+          id="menu-icon"
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        <svg
+          id="close-icon"
+          class="w-5 h-5 hidden"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+    <div
+      id="mobile-menu"
+      class="hidden mt-3 border-t border-gray-200 pt-3 space-y-1"
+    >
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class="mobile-nav-link flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+          >
+            <span class="font-medium text-sm">{item.label}</span>
+            <span class="text-xs text-gray-400">{item.labelEn}</span>
+          </a>
+        ))
+      }
+    </div>
   </nav>
 </header>
 
 <script>
+  // Scroll effect
   window.addEventListener("scroll", () => {
     const header = document.getElementById("header");
-    if (window.scrollY > 100) {
-      header?.classList.add("bg-white/80", "backdrop-blur-sm");
+    if (window.scrollY > 60) {
+      header?.classList.add("bg-white/90", "backdrop-blur-sm", "shadow-sm");
     } else {
-      header?.classList.remove("bg-white/80", "backdrop-blur-sm");
+      header?.classList.remove("bg-white/90", "backdrop-blur-sm", "shadow-sm");
     }
+  });
+
+  // Mobile menu toggle
+  const btn = document.getElementById("mobile-menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  const menuIcon = document.getElementById("menu-icon");
+  const closeIcon = document.getElementById("close-icon");
+
+  btn?.addEventListener("click", () => {
+    const isHidden = menu?.classList.contains("hidden");
+    menu?.classList.toggle("hidden");
+    menuIcon?.classList.toggle("hidden", !isHidden);
+    closeIcon?.classList.toggle("hidden", isHidden);
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll(".mobile-nav-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      menu?.classList.add("hidden");
+      menuIcon?.classList.remove("hidden");
+      closeIcon?.classList.add("hidden");
+    });
   });
 </script>
 

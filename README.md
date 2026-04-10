@@ -1,187 +1,142 @@
-<img width="1943" height="1093" alt="image" src="https://github.com/user-attachments/assets/cc2ff955-17c2-48c7-81c8-479a0f061850" />
+# AI PM / TPM 个人作品集 | Personal Portfolio
 
-# DevPortfolio Template
+> 江西财经大学 2026 届软件工程本科生，目标岗位：AI 产品经理 / 技术产品经理（TPM）  
+> 核心竞争力：AI Native 工作流编排 × 产品全闭环思维 × 结构化问题拆解
 
-A modern, minimalist portfolio template built with Astro and Tailwind CSS. Perfect for developers looking to showcase their skills, experience, and projects in a clean, professional way.
+Built with **Astro** + **Tailwind CSS v4**.
 
-This was completely rebuilt from the ground up from V1. This template was built to be entirely ready to go with a quick config edit (see below) but also provides the ability to easily extend in whatever way you want.
+---
 
-This template also comes with `CLAUDE.md` and `.cursor/rules` files for easy integration with your existing AI workflows.
+## 网站定位 | Site Overview
 
-> **📬 Connect & Share!**  
-> For questions and updates, feel free to reach out on [**X (Twitter)**](https://x.com/rfitzio).  
-> If you've built and published your personal site with this template, I'd love to see it! Send me a DM 🚀
+本网站面向**招聘官/面试官（AI PM / TPM 方向）**，展示：
+1. 从软件工程到 AI PM 的转型路径与核心能力
+2. 三个产品案例（DearLiHua / 酱菜内推系统 / EasyFit-AI）的完整思维链路
+3. 结构化产品方法论思考（Thinking Vault）
 
-## Preview
+---
 
-To view a live preview of the site, [click here](https://ryanfitzgerald.github.io/devportfolio/).
+## 页面结构 | Site Structure
 
-## Built With
-
-- **[Astro](https://astro.build/)** - Static site generator for modern web apps
-- **[Tailwind CSS v4](https://tailwindcss.com/)** - Utility-first CSS framework
-- **[Tabler Icons](https://tabler.io/icons)** - Free and open source icons
-- **TypeScript** - For type-safe configuration
-
-## Updating the Template
-
-### Configuration
-
-The template is designed to be easily customizable through the `src/config.ts` file. This single file controls:
-
-- **Personal Information**: Name, title, description
-- **Accent Color**: Primary color theme (changing this will change the accent color site wide)
-- **Social Links**: Email, LinkedIn, Twitter, GitHub (all optional)
-- **About Section**: Personal bio/description
-- **Skills**: List of technical skills
-- **Projects**: Project showcase with descriptions and links
-- **Experience**: Work history with bullet points
-- **Education**: Educational background and achievements
-
-If skills, projects, experience, or education are removed from the config, those sections will be hidden entirely.
-
-### Example structures
-
-Here's what the config data structure looks like for each section:
-
-#### Basic Information
-```typescript
-name: "Your Name",
-title: "Your Job Title",
-description: "Brief site description",
-accentColor: "#1d4ed8", // Hex color for theme
+```
+首页 Home         → #home          Hero + 三点速览 + CTA
+教育与成果         → #education     JXUFE 学历 + 里程碑成果
+案例 Case Studies → #case-studies  3 个案例（卡片 + 详情展开）
+思考库 Vault      → #thinking-vault Flashcards + Blog
+联系 Contact      → #contact        邮箱 / GitHub / LinkedIn / 微信
 ```
 
-#### Social Links (all optional)
-```typescript
-social: {
-  email: "your-email@example.com",
-  linkedin: "https://linkedin.com/in/yourprofile",
-  twitter: "https://twitter.com/yourprofile", 
-  github: "https://github.com/yourusername",
+每个案例详情使用统一三层结构：
+1. **Context**（概览：项目背景、痛点、用户、阶段）
+2. **Decisions**（问题定义、关键决策、工作流逻辑）
+3. **Artifacts**（PRD / 原型 / 分析文档 / Demo 链接）
+
+---
+
+## 内容配置 | Content Configuration
+
+所有内容通过 `src/config.ts` 管理，修改该文件即可更新网站内容。无需修改组件代码。
+
+```ts
+// src/config.ts 结构：
+siteConfig = {
+  social: { email, linkedin, github, wechat, resumeUrl },
+  education: { school, degree, highlights, milestones },
+  caseStudies: [ { id, name, tagline, tags, context, decisions, artifacts } ],
+  thinkingVault: { flashcards: [...], blogs: [...] },
+  contact: { note, resumeUrl, resumeLabel },
 }
 ```
 
-#### About Section
-```typescript
-aboutMe: "A paragraph describing yourself, your background, interests, and what you're passionate about. This appears in the About section of your portfolio."
+---
+
+## 占位素材替换指南 | Placeholder Replacement Guide
+
+### 1. 个人信息
+在 `src/config.ts` 中替换：
+```ts
+social: {
+  email: "your-email@example.com",    // → 真实邮箱
+  linkedin: "https://...",             // → 真实 LinkedIn URL
+  github: "https://github.com/...",    // → 真实 GitHub URL
+  resumeUrl: "/assets/resume.pdf",     // → 真实简历 PDF 路径
+}
 ```
 
-#### Skills
-```typescript
-skills: ["JavaScript", "React", "Node.js", "Python", "AWS", "Docker"]
+### 2. 微信二维码
+将微信二维码图片放至 `/public/assets/wechat-qr.png`，然后在代码中（`Hero.astro` 和 `Contact.astro`）将占位框替换为：
+```html
+<img src="/assets/wechat-qr.png" alt="微信二维码" class="w-32 h-32" />
 ```
 
-#### Projects
-```typescript
-projects: [
-  {
-    name: "Project Name",
-    description: "Brief description of what the project does and its impact",
-    link: "https://github.com/yourusername/project",
-    skills: ["React", "Node.js", "AWS"], // Technologies used
-  }
+### 3. 简历 PDF
+将简历 PDF 放至 `/public/assets/resume.pdf`，然后在 `src/config.ts` 更新：
+```ts
+resumeUrl: "/assets/resume.pdf",
+```
+
+### 4. 案例文档链接
+在 `src/config.ts` 的各案例 `artifacts` 数组中替换 `url` 字段：
+```ts
+artifacts: [
+  { type: "PRD", label: "PRD 文档", url: "https://...", note: "" },
+  { type: "原型", label: "Axure 原型", url: "https://...", note: "" },
 ]
 ```
 
-#### Experience
-```typescript
-experience: [
-  {
-    company: "Company Name",
-    title: "Your Job Title",
-    dateRange: "Jan 2022 - Present",
-    bullets: [
-      "Led development of microservices architecture serving 1M+ users",
-      "Reduced API response times by 40% through optimization",
-      "Mentored team of 5 junior developers",
-    ],
-  }
+### 5. 教育成果/里程碑
+在 `src/config.ts` 的 `education.milestones` 数组中替换占位描述：
+```ts
+milestones: [
+  { label: "奖项名称", desc: "具体描述" },
 ]
 ```
 
-#### Education
-```typescript
-education: [
-  {
-    school: "University Name",
-    degree: "Bachelor of Science in Computer Science",
-    dateRange: "2014 - 2018",
-    achievements: [
-      "Graduated Magna Cum Laude with 3.8 GPA",
-      "Dean's List all semesters",
-      "President of Computer Science Club"
-    ]
-  }
-]
+### 6. 新增 Flashcard 或 Blog
+在 `src/config.ts` 的 `thinkingVault.flashcards` 或 `thinkingVault.blogs` 数组中追加新条目，格式参照现有示例。
+
+---
+
+## 开发命令 | Development
+
+```bash
+npm install    # 安装依赖
+npm run dev    # 本地开发服务器
+npm run build  # 构建生产版本
+npm run preview # 预览生产构建
 ```
 
-### Icons
+---
 
-The template uses [Tabler Icons](https://tabler.io/icons) for all icons. If you wish to add more icons and have it look consistent with what's already there, you can browse through their extensive icon library.
+## 技术栈 | Tech Stack
 
-## Project Structure
+- **Astro** v5 — 静态站点生成
+- **Tailwind CSS v4** — 样式框架（@tailwindcss/vite）
+- **TypeScript** — 类型安全配置
+- **IBM Plex Mono** — 字体（Google Fonts）
 
-```
-devportfolio/
-├── public/
-│   └── favicon.svg          # Site favicon
-├── src/
-│   ├── components/          # Astro components
-│   │   ├── About.astro      # About section
-│   │   ├── Education.astro  # Education section
-│   │   ├── Experience.astro # Work experience section
-│   │   ├── Footer.astro     # Site footer
-│   │   ├── Header.astro     # Navigation header
-│   │   ├── Hero.astro       # Hero/intro section
-│   │   └── Projects.astro   # Projects showcase
-│   ├── pages/
-│   │   └── index.astro      # Main page layout
-│   ├── styles/
-│   │   └── global.css       # Global styles
-│   └── config.ts            # Site configuration
-├── astro.config.mjs         # Astro configuration
-├── package.json             # Project dependencies
-├── tailwind.config.js       # Tailwind configuration
-└── tsconfig.json            # TypeScript configuration
-```
+---
 
-## Local Development
-
-If you'd like to run it locally:
+## 目录结构 | Directory Structure
 
 ```
-git clone https://github.com/RyanFitzgerald/devportfolio.git
-cd devportfolio
-npm install
+src/
+├── components/
+│   ├── Header.astro       # 固定顶部导航（5个跳转锚点）
+│   ├── Hero.astro         # 首页 Hero（三点速览 + CTA + 社交链接）
+│   ├── Education.astro    # 教育与成果
+│   ├── CaseStudies.astro  # 案例（卡片 + Context/Decisions/Artifacts）
+│   ├── ThinkingVault.astro # 思考库（Flashcards + Blog）
+│   ├── Contact.astro      # 联系页
+│   └── Footer.astro       # 页脚
+├── pages/
+│   └── index.astro        # 主页面（组件装配）
+├── styles/
+│   └── global.css         # 全局样式
+└── config.ts              # 所有内容配置（单一配置文件）
+
+public/
+└── assets/
+    ├── resume-placeholder.pdf    # → 替换为真实简历
+    └── wechat-qr-placeholder.png # → 替换为真实微信二维码
 ```
-
-After that, start up the Astro dev server with:
-
-```
-npm run dev
-```
-
-## Deployment
-
-The template can be deployed to any static hosting service easily (and in most cases, completely free). Here are some options:
-
-- To deploy with Netlify, [click here](https://docs.astro.build/en/guides/deploy/netlify/).
-- To deploy with Vercel, [click here](https://docs.astro.build/en/guides/deploy/vercel/).
-- To deploy with GitHub Pages, [click here](https://docs.astro.build/en/guides/deploy/github/).
-- To deploy with Cloudflare Pages, [click here](https://docs.astro.build/en/guides/deploy/cloudflare/).
-- To deploy with Render, [click here](https://docs.astro.build/en/guides/deploy/render/).
-
-Want to deploy somewhere else? Find more guides [here](https://docs.astro.build/en/guides/deploy/).
-
-## Changelog
-
-To view the changelog, see CHANGELOG.md.
-
-## License
-
-This project is fully and completely MIT. See LICENSE.md.
-
-## Questions?
-
-Feel free to reach out on [X (Twitter)](https://x.com/rfitzio) if you have any questions or need help.

@@ -1,0 +1,270 @@
+---
+import { siteConfig } from "../config";
+const { flashcards, blogs } = siteConfig.thinkingVault;
+
+// All unique tags from flashcards
+const allTags = [...new Set(flashcards.flatMap((fc) => fc.tags))];
+const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
+---
+
+<section
+  id="thinking-vault"
+  class="p-8 sm:p-12 md:p-16 lg:p-24"
+  style={`--accent-color: ${siteConfig.accentColor}`}
+>
+  <!-- Section heading -->
+  <div class="mb-10 lg:mb-14">
+    <h2 class="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold text-gray-900">
+      思考库
+    </h2>
+    <p class="text-sm sm:text-base font-mono text-gray-400 mt-1">
+      Thinking Vault
+    </p>
+    <div
+      class="w-16 h-1 mt-3 rounded-full"
+      style={`background-color: ${siteConfig.accentColor}`}
+    >
+    </div>
+    <p class="mt-4 text-base text-gray-500 max-w-2xl">
+      产品方法论速览（Flashcards）× 项目复盘深潜（Blog）——持续更新的结构化思考记录。
+    </p>
+  </div>
+
+  <!-- Tab navigation -->
+  <div class="flex gap-1 mb-8 bg-gray-100 rounded-xl p-1 w-fit">
+    <button
+      id="tab-flashcards"
+      class="vault-tab px-5 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-white shadow-sm text-gray-900"
+      data-tab="flashcards"
+    >
+      Flashcards
+      <span class="ml-1.5 text-xs text-gray-400">({flashcards.length})</span>
+    </button>
+    <button
+      id="tab-blog"
+      class="vault-tab px-5 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-gray-600 hover:text-gray-900"
+      data-tab="blog"
+    >
+      Blog
+      <span class="ml-1.5 text-xs text-gray-400">({blogs.length})</span>
+    </button>
+  </div>
+
+  <!-- Flashcards panel -->
+  <div id="panel-flashcards">
+    <!-- Filter bar -->
+    <div class="flex flex-wrap gap-2 mb-6 items-center">
+      <span class="text-xs font-mono text-gray-400">筛选 / Filter:</span>
+      <button
+        class="fc-filter active-filter px-3 py-1 rounded-full text-xs font-medium bg-gray-900 text-white transition-all duration-200"
+        data-filter="all"
+      >
+        全部
+      </button>
+      {
+        allDomains.map((domain) => (
+          <button
+            class="fc-filter px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 transition-all duration-200"
+            data-filter={domain}
+          >
+            {domain}
+          </button>
+        ))
+      }
+    </div>
+
+    <!-- Flashcard grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="fc-grid">
+      {
+        flashcards.map((fc) => (
+          <div
+            class="fc-card bg-white rounded-xl border border-gray-200 p-5 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+            data-domain={fc.domain}
+            data-tags={fc.tags.join(",")}
+          >
+            <div class="flex items-start justify-between mb-3">
+              <h4 class="text-base font-bold text-gray-900 leading-snug pr-2">
+                {fc.title}
+              </h4>
+              <span
+                class="flex-shrink-0 text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 border border-blue-100"
+              >
+                {fc.domain}
+              </span>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed mb-4">
+              {fc.content}
+            </p>
+            <div class="flex flex-wrap gap-1.5">
+              {fc.tags.map((tag) => (
+                <span class="px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-[11px] font-mono">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Blog panel -->
+  <div id="panel-blog" class="hidden">
+    <div class="space-y-6">
+      {
+        blogs.map((blog) => (
+          <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-md transition-all duration-300">
+            <div class="p-6 sm:p-8">
+              <div class="flex flex-wrap items-center gap-2 mb-3">
+                <span class="text-xs font-mono text-gray-400">{blog.date}</span>
+                {blog.tags.map((tag) => (
+                  <span class="px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-[11px] font-mono">
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-1">
+                {blog.title}
+              </h3>
+              <p class="text-xs font-mono text-gray-400 mb-4">
+                {blog.titleEn}
+              </p>
+              <p class="text-sm text-gray-600 leading-relaxed mb-5">
+                {blog.summary}
+              </p>
+
+              <button
+                class="blog-toggle inline-flex items-center gap-2 text-sm font-medium transition-colors"
+                data-target={`blog-content-${blog.id}`}
+                style={`color: ${siteConfig.accentColor}`}
+              >
+                展开全文
+                <svg
+                  class="blog-arrow w-4 h-4 transition-transform duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+
+              <div id={`blog-content-${blog.id}`} class="hidden mt-5 space-y-5">
+                {blog.content.map((section) => (
+                  <div class="border-l-2 pl-4" style={`border-color: ${siteConfig.accentColor}`}>
+                    <h5 class="text-sm font-semibold text-gray-900 mb-2">
+                      {section.section}
+                    </h5>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                      {section.text}
+                    </p>
+                  </div>
+                ))}
+
+                {blog.relatedCase && (
+                  <div class="mt-4 pt-4 border-t border-gray-100">
+                    <a
+                      href={`#case-studies`}
+                      class="inline-flex items-center gap-1.5 text-xs font-mono transition-colors"
+                      style={`color: ${siteConfig.accentColor}`}
+                    >
+                      → 查看相关案例
+                    </a>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Placeholder note -->
+    <div class="mt-6 rounded-xl border border-dashed border-gray-300 p-4 text-center">
+      <p class="text-xs text-gray-400 font-mono">
+        + 更多复盘文章持续更新中 · 添加新 Blog 见 <code>src/config.ts</code>
+        中的 <code>thinkingVault.blogs</code>
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Tab switching
+  const tabs = document.querySelectorAll(".vault-tab");
+  const panels: Record<string, HTMLElement | null> = {
+    flashcards: document.getElementById("panel-flashcards"),
+    blog: document.getElementById("panel-blog"),
+  };
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const target = (tab as HTMLElement).dataset.tab ?? "";
+
+      tabs.forEach((t) => {
+        const el = t as HTMLElement;
+        el.classList.remove("bg-white", "shadow-sm", "text-gray-900");
+        el.classList.add("text-gray-600");
+      });
+      const el = tab as HTMLElement;
+      el.classList.add("bg-white", "shadow-sm", "text-gray-900");
+      el.classList.remove("text-gray-600");
+
+      Object.entries(panels).forEach(([key, panel]) => {
+        if (panel) panel.classList.toggle("hidden", key !== target);
+      });
+    });
+  });
+
+  // Flashcard domain filter
+  const filterBtns = document.querySelectorAll(".fc-filter");
+  const fcCards = document.querySelectorAll(".fc-card");
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filter = (btn as HTMLElement).dataset.filter ?? "all";
+
+      filterBtns.forEach((b) => {
+        const el = b as HTMLElement;
+        el.classList.remove("bg-gray-900", "text-white", "active-filter");
+        el.classList.add("bg-gray-100", "text-gray-600");
+      });
+      const el = btn as HTMLElement;
+      el.classList.add("bg-gray-900", "text-white", "active-filter");
+      el.classList.remove("bg-gray-100", "text-gray-600");
+
+      fcCards.forEach((card) => {
+        const cardEl = card as HTMLElement;
+        if (filter === "all" || cardEl.dataset.domain === filter) {
+          cardEl.classList.remove("hidden");
+        } else {
+          cardEl.classList.add("hidden");
+        }
+      });
+    });
+  });
+
+  // Blog expand/collapse
+  document.querySelectorAll(".blog-toggle").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const targetId = (btn as HTMLElement).dataset.target;
+      if (!targetId) return;
+      const content = document.getElementById(targetId);
+      if (!content) return;
+
+      const isHidden = content.classList.contains("hidden");
+      content.classList.toggle("hidden", !isHidden);
+
+      const arrow = btn.querySelector(".blog-arrow");
+      arrow?.classList.toggle("rotate-180", isHidden);
+
+      const textNode = btn.childNodes[0];
+      if (textNode) textNode.textContent = isHidden ? "收起" : "展开全文";
+    });
+  });
+</script>

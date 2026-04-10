@@ -111,8 +111,11 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
   <div id="panel-blog" class="hidden">
     <div class="space-y-6">
       {
-        blogs.map((blog) => (
-          <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-md transition-all duration-300">
+        blogs.map((blog, index) => (
+          <div
+            class="tv-blog-card tv-reveal bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-md transition-all duration-300"
+            style={`transition-delay: ${Math.min(index * 80, 220)}ms`}
+          >
             <div class="p-6 sm:p-8">
               <div class="flex flex-wrap items-center gap-2 mb-3">
                 <span class="text-xs font-mono text-gray-400">{blog.date}</span>
@@ -137,7 +140,7 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
                 data-target={`blog-content-${blog.id}`}
                 style={`color: ${siteConfig.accentColor}`}
               >
-                展开全文
+                <span class="blog-label">展开全文</span>
                 <svg
                   class="blog-arrow w-4 h-4 transition-transform duration-300"
                   fill="none"
@@ -153,29 +156,34 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
                 </svg>
               </button>
 
-              <div id={`blog-content-${blog.id}`} class="hidden mt-5 space-y-5">
-                {blog.content.map((section) => (
-                  <div class="border-l-2 pl-4" style={`border-color: ${siteConfig.accentColor}`}>
-                    <h5 class="text-sm font-semibold text-gray-900 mb-2">
-                      {section.section}
-                    </h5>
-                    <p class="text-sm text-gray-600 leading-relaxed">
-                      {section.text}
-                    </p>
-                  </div>
-                ))}
+              <div
+                id={`blog-content-${blog.id}`}
+                class="blog-content mt-0 max-h-0 overflow-hidden opacity-0 transition-all duration-300"
+              >
+                <div class="pt-5 space-y-5">
+                  {blog.content.map((section) => (
+                    <div class="border-l-2 pl-4" style={`border-color: ${siteConfig.accentColor}`}>
+                      <h5 class="text-sm font-semibold text-gray-900 mb-2">
+                        {section.section}
+                      </h5>
+                      <p class="text-sm text-gray-600 leading-relaxed">
+                        {section.text}
+                      </p>
+                    </div>
+                  ))}
 
-                {blog.relatedCase && (
-                  <div class="mt-4 pt-4 border-t border-gray-100">
-                    <a
-                      href={`#case-studies`}
-                      class="inline-flex items-center gap-1.5 text-xs font-mono transition-colors"
-                      style={`color: ${siteConfig.accentColor}`}
-                    >
-                      → 查看相关案例
-                    </a>
-                  </div>
-                )}
+                  {blog.relatedCase && (
+                    <div class="mt-4 pt-4 border-t border-gray-100">
+                      <a
+                        href={`#case-studies`}
+                        class="inline-flex items-center gap-1.5 text-xs font-mono transition-colors"
+                        style={`color: ${siteConfig.accentColor}`}
+                      >
+                        → 查看相关案例
+                      </a>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -194,6 +202,10 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
 </section>
 
 <script>
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
   // Tab switching
   const tabs = document.querySelectorAll(".vault-tab");
   const panels: Record<string, HTMLElement | null> = {
@@ -248,7 +260,7 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
     });
   });
 
-  // Blog expand/collapse
+  // Blog expand/collapse with smooth transition
   document.querySelectorAll(".blog-toggle").forEach((btn) => {
     btn.addEventListener("click", () => {
       const btnEl = btn as HTMLElement;
@@ -257,16 +269,112 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
       const content = document.getElementById(targetId);
       if (!content) return;
 
-      const isHidden = content.classList.contains("hidden");
-      content.classList.toggle("hidden", !isHidden);
+      const isExpanded = content.classList.contains("blog-expanded");
+      content.classList.toggle("blog-expanded", !isExpanded);
+      content.classList.toggle("max-h-0", isExpanded);
+      content.classList.toggle("opacity-0", isExpanded);
+      content.classList.toggle("mt-0", isExpanded);
+      content.classList.toggle("mt-5", !isExpanded);
+
+      if (!isExpanded) {
+        content.style.maxHeight = `${content.scrollHeight}px`;
+      } else {
+        if (content.style.maxHeight === "none") {
+          content.style.maxHeight = `${content.scrollHeight}px`;
+          requestAnimationFrame(() => {
+            content.style.maxHeight = "0px";
+          });
+        } else {
+          content.style.maxHeight = "0px";
+        }
+      }
 
       const arrow = btn.querySelector(".blog-arrow");
-      arrow?.classList.toggle("rotate-180", isHidden);
+      arrow?.classList.toggle("rotate-180", !isExpanded);
 
-      // Update button text using innerHTML to reliably update content
-      const newLabel = isHidden ? "收起" : "展开全文";
-      const arrowHtml = `<svg class="blog-arrow w-4 h-4 transition-transform duration-300${isHidden ? " rotate-180" : ""}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>`;
-      btnEl.innerHTML = newLabel + arrowHtml;
+      const label = btnEl.querySelector(".blog-label");
+      if (label) {
+        label.textContent = isExpanded ? "展开全文" : "收起";
+      }
+
+      if (!isExpanded) {
+        content.addEventListener(
+          "transitionend",
+          () => {
+            if (content.classList.contains("blog-expanded")) {
+              content.style.maxHeight = "none";
+            }
+          },
+          { once: true }
+        );
+      }
     });
   });
+
+  // Reveal animation for blog cards when switching to Blog tab and on first viewport entry
+  const revealBlogCards = () => {
+    const cards = Array.from(document.querySelectorAll(".tv-blog-card"));
+    cards.forEach((card, index) => {
+      if (prefersReducedMotion) {
+        card.classList.add("is-visible");
+        return;
+      }
+
+      window.setTimeout(() => {
+        card.classList.add("is-visible");
+      }, Math.min(index * 70, 260));
+    });
+  };
+
+  const panelBlog = document.getElementById("panel-blog");
+  if (panelBlog && "IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries, io) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          revealBlogCards();
+          io.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(panelBlog);
+  }
+
+  const blogTab = document.getElementById("tab-blog");
+  blogTab?.addEventListener("click", () => {
+    requestAnimationFrame(revealBlogCards);
+  });
 </script>
+
+<style>
+  .tv-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .tv-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .blog-content {
+    will-change: max-height, opacity, margin-top;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tv-reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .blog-arrow,
+    .blog-content {
+      transition-duration: 0ms !important;
+    }
+  }
+</style>
+

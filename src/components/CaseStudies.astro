@@ -1,6 +1,6 @@
 ---
+import { getCollection } from "astro:content";
 import { siteConfig } from "../config";
-const cases = siteConfig.caseStudies;
 
 const tagColors: Record<string, string> = {
   "LangChain Agent": "bg-purple-100 text-purple-700",
@@ -22,6 +22,32 @@ const tagColors: Record<string, string> = {
 function tagClass(tag: string): string {
   return tagColors[tag] ?? "bg-gray-100 text-gray-700";
 }
+
+// Fetch all cases, group by slug (without lang suffix)
+const allCases = await getCollection("cases");
+
+// Derive slug by stripping .zh / .en suffix
+function baseSlug(id: string): string {
+  return id.replace(/\.(zh|en)$/, "");
+}
+
+// Group into { slug: { zh: entry, en: entry } }
+const grouped: Record<string, { zh?: typeof allCases[number]; en?: typeof allCases[number] }> = {};
+for (const entry of allCases) {
+  const slug = baseSlug(entry.id);
+  if (!grouped[slug]) grouped[slug] = {};
+  grouped[slug][entry.data.lang] = entry;
+}
+
+// Ordered list of slugs (preserve original order)
+const caseOrder = ["dear-li-hua", "jiangcai-referral", "easyfit-ai"];
+const cases = caseOrder
+  .filter((s) => grouped[s])
+  .map((s) => ({
+    id: s,
+    zh: grouped[s].zh!,
+    en: grouped[s].en!,
+  }));
 ---
 
 <section
@@ -53,7 +79,10 @@ function tagClass(tag: string): string {
   <!-- Case study cards -->
   <div class="space-y-6">
     {
-      cases.map((cs, index) => (
+      cases.map((cs, index) => {
+        const zh = cs.zh.data;
+        const en = cs.en.data;
+        return (
         <div
           class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300"
           id={`case-card-${cs.id}`}
@@ -70,16 +99,16 @@ function tagClass(tag: string): string {
                     0{index + 1}
                   </span>
                   <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
-                    <span data-zh>{cs.name}</span>
-                    <span data-en>{cs.nameEn}</span>
+                    <span data-zh>{zh.name}</span>
+                    <span data-en>{en.nameEn}</span>
                   </h3>
                 </div>
                 <p class="text-base text-gray-600 leading-relaxed font-medium">
-                  <span data-zh>{cs.tagline}</span>
-                  <span data-en>{cs.taglineEn}</span>
+                  <span data-zh>{zh.tagline}</span>
+                  <span data-en>{en.taglineEn}</span>
                 </p>
                 <div class="flex flex-wrap gap-2 mt-4">
-                  {cs.tags.map((tag) => (
+                  {zh.tags.map((tag: string) => (
                     <span
                       class={`px-2.5 py-1 rounded-full text-xs font-medium ${tagClass(tag)}`}
                     >
@@ -135,8 +164,8 @@ function tagClass(tag: string): string {
                       <span data-en>Summary</span>
                     </p>
                     <p class="text-sm text-gray-700 leading-relaxed">
-                      <span data-zh>{cs.context.summary}</span>
-                      <span data-en>{cs.context.summaryEn}</span>
+                      <span data-zh>{zh.summary}</span>
+                      <span data-en>{en.summaryEn}</span>
                     </p>
                   </div>
                   <div class="space-y-3">
@@ -146,8 +175,8 @@ function tagClass(tag: string): string {
                         <span data-en>Pain Point</span>
                       </p>
                       <p class="text-sm text-gray-700 leading-relaxed">
-                        <span data-zh>{cs.context.problem}</span>
-                        <span data-en>{cs.context.problemEn}</span>
+                        <span data-zh>{zh.problem}</span>
+                        <span data-en>{en.problemEn}</span>
                       </p>
                     </div>
                     <div class="bg-gray-50 rounded-xl p-4">
@@ -156,8 +185,8 @@ function tagClass(tag: string): string {
                         <span data-en>Users</span>
                       </p>
                       <p class="text-sm text-gray-700 leading-relaxed">
-                        <span data-zh>{cs.context.users}</span>
-                        <span data-en>{cs.context.usersEn}</span>
+                        <span data-zh>{zh.users}</span>
+                        <span data-en>{en.usersEn}</span>
                       </p>
                     </div>
                     <div class="bg-gray-50 rounded-xl p-4">
@@ -166,8 +195,8 @@ function tagClass(tag: string): string {
                         <span data-en>Stage</span>
                       </p>
                       <p class="text-sm text-gray-700 leading-relaxed">
-                        <span data-zh>{cs.context.stage}</span>
-                        <span data-en>{cs.context.stageEn}</span>
+                        <span data-zh>{zh.stage}</span>
+                        <span data-en>{en.stageEn}</span>
                       </p>
                     </div>
                   </div>
@@ -185,7 +214,7 @@ function tagClass(tag: string): string {
                   <span data-en>Decisions — Problem Definition & Key Decisions</span>
                 </h4>
                 <div class="space-y-4">
-                  {cs.decisions.map((d) => (
+                  {zh.decisions.map((d: any, di: number) => (
                     <div class="border-l-2 pl-4" style={`border-color: ${siteConfig.accentColor}`}>
                       <h5 class="text-sm font-semibold text-gray-900 mb-1">
                         <span data-zh>{d.title}</span>
@@ -193,7 +222,7 @@ function tagClass(tag: string): string {
                       </h5>
                       <p class="text-sm text-gray-600 leading-relaxed">
                         <span data-zh>{d.content}</span>
-                        <span data-en>{d.contentEn}</span>
+                        <span data-en>{en.decisions[di]?.contentEn}</span>
                       </p>
                     </div>
                   ))}
@@ -211,7 +240,7 @@ function tagClass(tag: string): string {
                   <span data-en>Artifacts — Deliverables</span>
                 </h4>
                 <div class="flex flex-wrap gap-3">
-                  {cs.artifacts.map((art) => (
+                  {zh.artifacts.map((art: any) => (
                     <a
                       href={art.url}
                       class="group inline-flex flex-col gap-1 px-4 py-3 bg-gray-50 hover:bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all duration-200"
@@ -234,7 +263,8 @@ function tagClass(tag: string): string {
             </div>
           </div>
         </div>
-      ))
+      );
+      })
     }
   </div>
 </section>

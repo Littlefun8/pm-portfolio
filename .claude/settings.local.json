@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git pull:*)",
+      "Bash(npm run dev)",
+      "Bash(npm run build)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd bilingual \\(zh/en\\) i18n support with client-side language toggle\n\n- Create i18n.ts language switcher with localStorage persistence\n- Add data-zh/data-en attributes to all components for CSS-based toggling\n- Update config.ts with comprehensive zh/en content pairs\n- Add language toggle buttons in header \\(desktop + mobile\\)\n- Update CaseStudies tagColors to match actual English tags in config\n- Build verified, all 6 sections fully bilingual\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git checkout:*)",
+      "Bash(npx astro build)"
+    ]
+  }
+}

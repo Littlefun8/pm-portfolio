@@ -297,6 +297,11 @@ import { siteConfig } from "../config";
     wechatPopup?.classList.toggle("hidden");
   });
 
+  // Close popup when clicking outside (stop propagation on popup itself)
+  wechatPopup?.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+
   document.addEventListener("click", () => {
     wechatPopup?.classList.add("hidden");
   });

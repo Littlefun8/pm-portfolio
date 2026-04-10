@@ -2,8 +2,7 @@
 import { siteConfig } from "../config";
 const { flashcards, blogs } = siteConfig.thinkingVault;
 
-// All unique tags from flashcards
-const allTags = [...new Set(flashcards.flatMap((fc) => fc.tags))];
+// All unique domains from flashcards
 const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
 ---
 
@@ -252,7 +251,8 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
   // Blog expand/collapse
   document.querySelectorAll(".blog-toggle").forEach((btn) => {
     btn.addEventListener("click", () => {
-      const targetId = (btn as HTMLElement).dataset.target;
+      const btnEl = btn as HTMLElement;
+      const targetId = btnEl.dataset.target;
       if (!targetId) return;
       const content = document.getElementById(targetId);
       if (!content) return;
@@ -263,8 +263,10 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
       const arrow = btn.querySelector(".blog-arrow");
       arrow?.classList.toggle("rotate-180", isHidden);
 
-      const textNode = btn.childNodes[0];
-      if (textNode) textNode.textContent = isHidden ? "收起" : "展开全文";
+      // Update button text using innerHTML to reliably update content
+      const newLabel = isHidden ? "收起" : "展开全文";
+      const arrowHtml = `<svg class="blog-arrow w-4 h-4 transition-transform duration-300${isHidden ? " rotate-180" : ""}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>`;
+      btnEl.innerHTML = newLabel + arrowHtml;
     });
   });
 </script>

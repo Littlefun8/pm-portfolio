@@ -228,23 +228,9 @@ function tagClass(tag: string): string {
       arrow?.classList.toggle("rotate-180", isHidden);
 
       const btnEl = btn as HTMLElement;
-      btnEl.textContent = "";
-      const label = document.createTextNode(isHidden ? "收起" : "查看详情");
-      btnEl.appendChild(label);
-
-      // Re-append arrow
-      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-      svg.setAttribute("class", `toggle-arrow w-4 h-4 transition-transform duration-300${isHidden ? " rotate-180" : ""}`);
-      svg.setAttribute("fill", "none");
-      svg.setAttribute("stroke", "currentColor");
-      svg.setAttribute("viewBox", "0 0 24 24");
-      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-      path.setAttribute("stroke-linecap", "round");
-      path.setAttribute("stroke-linejoin", "round");
-      path.setAttribute("stroke-width", "2");
-      path.setAttribute("d", "M19 9l-7 7-7-7");
-      svg.appendChild(path);
-      btnEl.appendChild(svg);
+      const newLabel = isHidden ? "收起" : "查看详情";
+      const arrowClass = `toggle-arrow w-4 h-4 transition-transform duration-300${isHidden ? " rotate-180" : ""}`;
+      btnEl.innerHTML = `${newLabel}<svg class="${arrowClass}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>`;
     });
   });
 </script>

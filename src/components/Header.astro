@@ -24,14 +24,20 @@ const navItems = [
               href={item.href}
               class="nav-link group flex flex-col items-center text-gray-700 hover:text-black transition-colors"
             >
-              <span class="font-medium text-sm">{item.label}</span>
-              <span class="text-[10px] text-gray-400 group-hover:text-gray-500 transition-colors leading-tight">
-                {item.labelEn}
-              </span>
+              <span data-zh class="font-medium text-sm">{item.label}</span>
+              <span data-en class="font-medium text-sm">{item.labelEn}</span>
             </a>
           </li>
         ))
       }
+      <li>
+        <button
+          id="lang-toggle"
+          class="px-2.5 py-1 rounded-md text-xs font-mono font-semibold border border-gray-300 text-gray-600 hover:text-gray-900 hover:border-gray-400 transition-all duration-200"
+        >
+          EN
+        </button>
+      </li>
     </ul>
   </nav>
 
@@ -41,38 +47,46 @@ const navItems = [
       <span class="font-semibold text-gray-800 text-sm"
         >{siteConfig.title}</span
       >
-      <button
-        id="mobile-menu-btn"
-        aria-label="打开菜单"
-        class="p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
-      >
-        <svg
-          id="menu-icon"
-          class="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
+      <div class="flex items-center gap-2">
+        <button
+          id="lang-toggle-mobile"
+          class="px-2.5 py-1 rounded-md text-xs font-mono font-semibold border border-gray-300 text-gray-600 hover:text-gray-900 hover:border-gray-400 transition-all duration-200"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-        <svg
-          id="close-icon"
-          class="w-5 h-5 hidden"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
+          EN
+        </button>
+        <button
+          id="mobile-menu-btn"
+          aria-label="打开菜单"
+          class="p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </button>
+          <svg
+            id="menu-icon"
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+          <svg
+            id="close-icon"
+            class="w-5 h-5 hidden"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
     </div>
     <div
       id="mobile-menu"
@@ -84,8 +98,8 @@ const navItems = [
             href={item.href}
             class="mobile-nav-link flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
           >
-            <span class="font-medium text-sm">{item.label}</span>
-            <span class="text-xs text-gray-400">{item.labelEn}</span>
+            <span data-zh class="font-medium text-sm">{item.label}</span>
+            <span data-en class="font-medium text-sm">{item.labelEn}</span>
           </a>
         ))
       }
@@ -124,6 +138,13 @@ const navItems = [
       menuIcon?.classList.remove("hidden");
       closeIcon?.classList.add("hidden");
     });
+  });
+
+  // Language toggle for mobile button (synced with i18n.ts)
+  const mobileLangBtn = document.getElementById("lang-toggle-mobile");
+  mobileLangBtn?.addEventListener("click", () => {
+    const desktopBtn = document.getElementById("lang-toggle");
+    desktopBtn?.click();
   });
 </script>
 

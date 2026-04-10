@@ -2,11 +2,11 @@
 import { siteConfig } from "../config";
 
 const navItems = [
-  { href: "#home", label: "首页" },
-  { href: "#education", label: "教育与成果" },
-  { href: "#case-studies", label: "案例" },
-  { href: "#thinking-vault", label: "思考库" },
-  { href: "#contact", label: "联系" },
+  { href: "#home", label: "首页", labelEn: "Home" },
+  { href: "#education", label: "教育与成果", labelEn: "Education" },
+  { href: "#case-studies", label: "案例", labelEn: "Cases" },
+  { href: "#thinking-vault", label: "思考库", labelEn: "Thinking Vault" },
+  { href: "#contact", label: "联系", labelEn: "Contact" },
 ];
 ---
 
@@ -18,8 +18,14 @@ const navItems = [
     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
       <!-- Left: name + title -->
       <div>
-        <p class="text-base font-bold text-gray-800">L</p>
-        <p class="text-sm text-gray-500">{siteConfig.title}</p>
+        <p class="text-base font-bold text-gray-800">
+          <span data-zh>{siteConfig.name}</span>
+          <span data-en>{siteConfig.nameEn}</span>
+        </p>
+        <p class="text-sm text-gray-500">
+          <span data-zh>{siteConfig.title}</span>
+          <span data-en>{siteConfig.titleEn}</span>
+        </p>
         <div class="flex gap-x-4 mt-3">
           {
             siteConfig.social?.email && (
@@ -76,13 +82,14 @@ const navItems = [
                 href={item.href}
                 class="text-sm text-gray-500 hover:text-gray-800 transition-colors"
               >
-                {item.label}
+                <span data-zh>{item.label}</span>
+                <span data-en>{item.labelEn}</span>
               </a>
             ))
           }
         </nav>
         <p class="text-xs text-gray-400">
-          © {new Date().getFullYear()} L. Built with Astro.
+          &copy; {new Date().getFullYear()} <span data-zh>{siteConfig.name}</span><span data-en>{siteConfig.nameEn}</span>. <span data-zh>基于 Astro 构建</span><span data-en>Built with Astro</span>.
         </p>
       </div>
     </div>

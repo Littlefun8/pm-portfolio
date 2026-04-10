@@ -39,122 +39,142 @@ import { siteConfig } from "../config";
   <div
     class="h-full mx-auto px-8 sm:px-12 md:px-24 pt-32 md:pt-0 md:min-h-screen flex flex-col justify-center"
   >
-    <div class="max-w-3xl">
-      <!-- Greeting -->
-      <p
-        class="text-base sm:text-lg font-mono animate-fade-in"
-        style={`color: ${siteConfig.accentColor}`}
-      >
-        你好，我是 / Hi, I'm
-      </p>
+    <div class="flex items-center gap-8">
+      <div class="flex-1 max-w-3xl">
+        <!-- Greeting -->
+        <p
+          class="text-base sm:text-lg font-mono animate-fade-in"
+          style={`color: ${siteConfig.accentColor}`}
+        >
+          <span data-zh>{siteConfig.hero.greeting}</span>
+          <span data-en>{siteConfig.hero.greetingEn}</span>
+        </p>
 
-      <!-- Name / Identity -->
-      <h1
-        class="mt-3 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-gray-900 animate-fade-in animation-delay-200"
-      >
-        L
-      </h1>
-      <p
-        class="mt-2 text-xl sm:text-2xl md:text-3xl font-semibold text-gray-700 animate-fade-in animation-delay-200"
-      >
-        软件工程 → AI PM / TPM
-      </p>
+        <!-- Name / Identity -->
+        <h1
+          class="mt-3 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-gray-900 animate-fade-in animation-delay-200"
+        >
+          <span data-zh>{siteConfig.name}</span>
+          <span data-en>{siteConfig.nameEn}</span>
+        </h1>
+        <p
+          class="mt-2 text-xl sm:text-2xl md:text-3xl font-semibold text-gray-700 animate-fade-in animation-delay-200"
+        >
+          <span data-zh>{siteConfig.hero.identity}</span>
+          <span data-en>{siteConfig.hero.identityEn}</span>
+        </p>
 
-      <!-- 3-point overview cards -->
-      <div
-        class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 animate-fade-in animation-delay-400"
-      >
+        <!-- 3-point overview cards -->
         <div
-          class="bg-white/70 backdrop-blur-sm border border-gray-200 rounded-xl p-4 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+          class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 animate-fade-in animation-delay-400"
         >
           <div
-            class="text-xs font-mono font-semibold uppercase tracking-widest mb-1"
-            style={`color: ${siteConfig.accentColor}`}
+            class="bg-white/70 backdrop-blur-sm border border-gray-200 rounded-xl p-4 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
           >
-            身份 Identity
+            <div
+              class="text-xs font-mono font-semibold uppercase tracking-widest mb-1"
+              style={`color: ${siteConfig.accentColor}`}
+            >
+              <span data-zh>身份 Identity</span>
+              <span data-en>Identity</span>
+            </div>
+            <p class="text-sm text-gray-700 leading-relaxed">
+              <span data-zh>应届生 · 软件工程背景 · AI Native 工作流实践者</span>
+              <span data-en>Fresh grad · Software Engineering · AI-Native Workflow Practitioner</span>
+            </p>
           </div>
-          <p class="text-sm text-gray-700 leading-relaxed">
-            应届生 · 软件工程背景 · AI Native 工作流实践者
-          </p>
+          <div
+            class="bg-white/70 backdrop-blur-sm border border-gray-200 rounded-xl p-4 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+          >
+            <div
+              class="text-xs font-mono font-semibold uppercase tracking-widest mb-1"
+              style={`color: ${siteConfig.accentColor}`}
+            >
+              <span data-zh>目标 Target Role</span>
+              <span data-en>Target Role</span>
+            </div>
+            <p class="text-sm text-gray-700 leading-relaxed">
+              <span data-zh>{siteConfig.hero.targetRole}</span>
+              <span data-en>{siteConfig.hero.targetRoleEn}</span>
+            </p>
+          </div>
+          <div
+            class="bg-white/70 backdrop-blur-sm border border-gray-200 rounded-xl p-4 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+          >
+            <div
+              class="text-xs font-mono font-semibold uppercase tracking-widest mb-1"
+              style={`color: ${siteConfig.accentColor}`}
+            >
+              <span data-zh>能力 Core Skills</span>
+              <span data-en>Core Skills</span>
+            </div>
+            <p class="text-sm text-gray-700 leading-relaxed">
+              <span data-zh>{siteConfig.hero.coreAbility}</span>
+              <span data-en>{siteConfig.hero.coreAbilityEn}</span>
+            </p>
+          </div>
         </div>
-        <div
-          class="bg-white/70 backdrop-blur-sm border border-gray-200 rounded-xl p-4 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+
+        <!-- Tagline -->
+        <p
+          class="mt-6 text-base sm:text-lg text-gray-500 leading-relaxed animate-fade-in animation-delay-400"
         >
-          <div
-            class="text-xs font-mono font-semibold uppercase tracking-widest mb-1"
-            style={`color: ${siteConfig.accentColor}`}
-          >
-            目标 Target Role
-          </div>
-          <p class="text-sm text-gray-700 leading-relaxed">
-            AI 产品经理 / 技术产品经理（TPM）
-          </p>
-        </div>
+          {siteConfig.hero.tagline}
+        </p>
+
+        <!-- CTAs -->
         <div
-          class="bg-white/70 backdrop-blur-sm border border-gray-200 rounded-xl p-4 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+          class="mt-8 flex flex-wrap items-center gap-4 animate-fade-in animation-delay-600"
         >
-          <div
-            class="text-xs font-mono font-semibold uppercase tracking-widest mb-1"
-            style={`color: ${siteConfig.accentColor}`}
+          <a
+            href="#case-studies"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-white transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5 hover:shadow-lg"
+            style={`background-color: ${siteConfig.accentColor}`}
           >
-            能力 Core Skills
-          </div>
-          <p class="text-sm text-gray-700 leading-relaxed">
-            AI 编排 · 产品闭环 · 结构化问题拆解
-          </p>
+            <span data-zh>查看案例</span>
+            <span data-en>View Cases</span>
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </a>
+          <a
+            href={siteConfig.social.resumeUrl}
+            download
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-gray-800 bg-white border border-gray-300 transition-all duration-300 hover:border-gray-400 hover:-translate-y-0.5 hover:shadow-md"
+          >
+            <span data-zh>下载简历</span>
+            <span data-en>Download Resume</span>
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+              ></path>
+            </svg>
+          </a>
         </div>
       </div>
 
-      <!-- Tagline -->
-      <p
-        class="mt-6 text-base sm:text-lg text-gray-500 leading-relaxed animate-fade-in animation-delay-400"
-      >
-        从软件工程到 AI PM — 用工程师的严谨，做产品经理的闭环。
-      </p>
-
-      <!-- CTAs -->
-      <div
-        class="mt-8 flex flex-wrap items-center gap-4 animate-fade-in animation-delay-600"
-      >
-        <a
-          href="#case-studies"
-          class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-white transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5 hover:shadow-lg"
-          style={`background-color: ${siteConfig.accentColor}`}
-        >
-          查看案例
-          <svg
-            class="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 9l-7 7-7-7"></path>
-          </svg>
-        </a>
-        <a
-          href={siteConfig.social.resumeUrl}
-          download
-          class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-gray-800 bg-white border border-gray-300 transition-all duration-300 hover:border-gray-400 hover:-translate-y-0.5 hover:shadow-md"
-        >
-          下载简历
-          <svg
-            class="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-            ></path>
-          </svg>
-        </a>
+      <!-- Right side avatar placeholder -->
+      <div class="hidden lg:block lg:w-2/5">
+        <div id="hero-avatar" class="relative">
+          <!-- Avatar image placeholder: put your cartoon image at public/assets/avatar.png -->
+        </div>
       </div>
     </div>
   </div>

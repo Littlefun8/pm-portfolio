@@ -12,10 +12,12 @@ const edu = siteConfig.education;
     <!-- Section heading (bilingual) -->
     <div class="mb-10 lg:mb-14">
       <h2 class="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold text-gray-900">
-        教育与成果
+        <span data-zh>教育与成果</span>
+        <span data-en>Education &amp; Achievements</span>
       </h2>
       <p class="text-sm sm:text-base font-mono text-gray-400 mt-1">
-        Education &amp; Achievements
+        <span data-zh>Education &amp; Achievements</span>
+        <span data-en>教育与成果</span>
       </p>
       <div
         class="w-16 h-1 mt-3 rounded-full"
@@ -31,29 +33,33 @@ const edu = siteConfig.education;
           class="text-xs font-mono font-semibold uppercase tracking-widest mb-4"
           style={`color: ${siteConfig.accentColor}`}
         >
-          学历背景 / Education
+          <span data-zh>学历背景</span>
+          <span data-en>Education</span>
         </h3>
         <div
           class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow duration-300"
         >
           <div class="flex items-start justify-between mb-4">
             <div>
-              <h4 class="text-xl font-bold text-gray-900">{edu.school}</h4>
-              <p class="text-sm text-gray-400 font-mono mt-0.5">
-                {edu.schoolEn}
-              </p>
+              <h4 class="text-xl font-bold text-gray-900">
+                <span data-zh>{edu.school}</span>
+                <span data-en>{edu.schoolEn}</span>
+              </h4>
             </div>
             <span
               class="text-xs font-mono px-2 py-1 rounded-md text-white ml-3 flex-shrink-0"
               style={`background-color: ${siteConfig.accentColor}`}
             >
-              2026 届
+              <span data-zh>2026 届</span>
+              <span data-en>Class of 2026</span>
             </span>
           </div>
 
           <div class="mb-4">
-            <p class="text-base font-semibold text-gray-700">{edu.degree}</p>
-            <p class="text-xs text-gray-400 font-mono">{edu.degreeEn}</p>
+            <p class="text-base font-semibold text-gray-700">
+              <span data-zh>{edu.degree}</span>
+              <span data-en>{edu.degreeEn}</span>
+            </p>
           </div>
 
           <ul class="space-y-2">
@@ -64,7 +70,8 @@ const edu = siteConfig.education;
                     class="inline-block w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0"
                     style={`background-color: ${siteConfig.accentColor}`}
                   />
-                  <span class="text-sm text-gray-600">{item}</span>
+                  <span data-zh class="text-sm text-gray-600">{item.zh}</span>
+                  <span data-en class="text-sm text-gray-600">{item.en}</span>
                 </li>
               ))
             }
@@ -78,7 +85,8 @@ const edu = siteConfig.education;
           class="text-xs font-mono font-semibold uppercase tracking-widest mb-4"
           style={`color: ${siteConfig.accentColor}`}
         >
-          成果与里程碑 / Milestones
+          <span data-zh>成果与里程碑</span>
+          <span data-en>Milestones</span>
         </h3>
         <div class="space-y-4">
           {
@@ -93,26 +101,18 @@ const edu = siteConfig.education;
                   </div>
                   <div>
                     <h4 class="text-base font-semibold text-gray-900 mb-1">
-                      {milestone.label}
+                      <span data-zh>{milestone.label}</span>
+                      <span data-en>{milestone.labelEn}</span>
                     </h4>
                     <p class="text-sm text-gray-600 leading-relaxed">
-                      {milestone.desc}
+                      <span data-zh>{milestone.desc}</span>
+                      <span data-en>{milestone.descEn}</span>
                     </p>
                   </div>
                 </div>
               </div>
             ))
           }
-
-          <!-- Placeholder note -->
-          <div
-            class="rounded-xl border border-dashed border-gray-300 p-4 text-center"
-          >
-            <p class="text-xs text-gray-400 font-mono">
-              + 更多成果待补充 · 替换里程碑内容见 <code>src/config.ts</code>
-              中的 <code>education.milestones</code>
-            </p>
-          </div>
         </div>
       </div>
     </div>

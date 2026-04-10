@@ -14,10 +14,12 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
   <!-- Section heading -->
   <div class="mb-10 lg:mb-14">
     <h2 class="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold text-gray-900">
-      思考库
+      <span data-zh>思考库</span>
+      <span data-en>Thinking Vault</span>
     </h2>
     <p class="text-sm sm:text-base font-mono text-gray-400 mt-1">
-      Thinking Vault
+      <span data-zh>Thinking Vault</span>
+      <span data-en>思考库</span>
     </p>
     <div
       class="w-16 h-1 mt-3 rounded-full"
@@ -25,7 +27,8 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
     >
     </div>
     <p class="mt-4 text-base text-gray-500 max-w-2xl">
-      产品方法论速览（Flashcards）× 项目复盘深潜（Blog）——持续更新的结构化思考记录。
+      <span data-zh>产品方法论速览（Flashcards）× 项目复盘深潜（Blog）——持续更新的结构化思考记录。</span>
+      <span data-en>Product methodology flashcards × Project retrospective deep dives — continuously updated structured thinking notes.</span>
     </p>
   </div>
 
@@ -53,12 +56,16 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
   <div id="panel-flashcards">
     <!-- Filter bar -->
     <div class="flex flex-wrap gap-2 mb-6 items-center">
-      <span class="text-xs font-mono text-gray-400">筛选 / Filter:</span>
+      <span class="text-xs font-mono text-gray-400">
+        <span data-zh>筛选</span>
+        <span data-en>Filter</span>
+      </span>
       <button
         class="fc-filter active-filter px-3 py-1 rounded-full text-xs font-medium bg-gray-900 text-white transition-all duration-200"
         data-filter="all"
       >
-        全部
+        <span data-zh>全部</span>
+        <span data-en>All</span>
       </button>
       {
         allDomains.map((domain) => (
@@ -83,7 +90,8 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
           >
             <div class="flex items-start justify-between mb-3">
               <h4 class="text-base font-bold text-gray-900 leading-snug pr-2">
-                {fc.title}
+                <span data-zh>{fc.title}</span>
+                <span data-en>{fc.titleEn}</span>
               </h4>
               <span
                 class="flex-shrink-0 text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 border border-blue-100"
@@ -92,7 +100,8 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
               </span>
             </div>
             <p class="text-sm text-gray-600 leading-relaxed mb-4">
-              {fc.content}
+              <span data-zh>{fc.content}</span>
+              <span data-en>{fc.contentEn}</span>
             </p>
             <div class="flex flex-wrap gap-1.5">
               {fc.tags.map((tag) => (
@@ -123,13 +132,12 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
                 ))}
               </div>
               <h3 class="text-xl font-bold text-gray-900 mb-1">
-                {blog.title}
+                <span data-zh>{blog.title}</span>
+                <span data-en>{blog.titleEn}</span>
               </h3>
-              <p class="text-xs font-mono text-gray-400 mb-4">
-                {blog.titleEn}
-              </p>
               <p class="text-sm text-gray-600 leading-relaxed mb-5">
-                {blog.summary}
+                <span data-zh>{blog.summary}</span>
+                <span data-en>{blog.summaryEn}</span>
               </p>
 
               <button
@@ -137,7 +145,8 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
                 data-target={`blog-content-${blog.id}`}
                 style={`color: ${siteConfig.accentColor}`}
               >
-                展开全文
+                <span data-zh>展开全文</span>
+                <span data-en>Expand</span>
                 <svg
                   class="blog-arrow w-4 h-4 transition-transform duration-300"
                   fill="none"
@@ -157,10 +166,12 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
                 {blog.content.map((section) => (
                   <div class="border-l-2 pl-4" style={`border-color: ${siteConfig.accentColor}`}>
                     <h5 class="text-sm font-semibold text-gray-900 mb-2">
-                      {section.section}
+                      <span data-zh>{section.section}</span>
+                      <span data-en>{section.sectionEn}</span>
                     </h5>
                     <p class="text-sm text-gray-600 leading-relaxed">
-                      {section.text}
+                      <span data-zh>{section.text}</span>
+                      <span data-en>{section.textEn}</span>
                     </p>
                   </div>
                 ))}
@@ -172,7 +183,8 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
                       class="inline-flex items-center gap-1.5 text-xs font-mono transition-colors"
                       style={`color: ${siteConfig.accentColor}`}
                     >
-                      → 查看相关案例
+                      <span data-zh>→ 查看相关案例</span>
+                      <span data-en>→ View Related Case</span>
                     </a>
                   </div>
                 )}
@@ -186,8 +198,12 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
     <!-- Placeholder note -->
     <div class="mt-6 rounded-xl border border-dashed border-gray-300 p-4 text-center">
       <p class="text-xs text-gray-400 font-mono">
-        + 更多复盘文章持续更新中 · 添加新 Blog 见 <code>src/config.ts</code>
-        中的 <code>thinkingVault.blogs</code>
+        <span data-zh>+ 更多复盘文章持续更新中 · 添加新 Blog 见 </span>
+        <span data-en>+ More retrospective articles coming · Add new blogs in </span>
+        <code>src/config.ts</code>
+        <span data-zh> 中的 </span>
+        <span data-en> at </span>
+        <code>thinkingVault.blogs</code>
       </p>
     </div>
   </div>
@@ -263,10 +279,11 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
       const arrow = btn.querySelector(".blog-arrow");
       arrow?.classList.toggle("rotate-180", isHidden);
 
-      // Update button text using innerHTML to reliably update content
-      const newLabel = isHidden ? "收起" : "展开全文";
-      const arrowHtml = `<svg class="blog-arrow w-4 h-4 transition-transform duration-300${isHidden ? " rotate-180" : ""}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>`;
-      btnEl.innerHTML = newLabel + arrowHtml;
+      // Update bilingual button text
+      const zhSpan = btn.querySelector('[data-zh]');
+      const enSpan = btn.querySelector('[data-en]');
+      if (zhSpan) zhSpan.textContent = isHidden ? '收起' : '展开全文';
+      if (enSpan) enSpan.textContent = isHidden ? 'Collapse' : 'Expand';
     });
   });
 </script>

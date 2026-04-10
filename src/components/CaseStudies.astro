@@ -3,20 +3,20 @@ import { siteConfig } from "../config";
 const cases = siteConfig.caseStudies;
 
 const tagColors: Record<string, string> = {
-  "多模态 AI": "bg-purple-100 text-purple-700",
-  "微信小程序": "bg-green-100 text-green-700",
+  "LangChain Agent": "bg-purple-100 text-purple-700",
+  "WeChat Mini Program": "bg-green-100 text-green-700",
   "OCR": "bg-yellow-100 text-yellow-700",
-  "Prompt 工程": "bg-pink-100 text-pink-700",
-  "全栈开发": "bg-blue-100 text-blue-700",
-  "用户调研": "bg-orange-100 text-orange-700",
-  "需求优先级": "bg-teal-100 text-teal-700",
-  "校园场景": "bg-lime-100 text-lime-700",
-  "AI 编排": "bg-indigo-100 text-indigo-700",
-  "图像生成": "bg-rose-100 text-rose-700",
-  "API 链路": "bg-cyan-100 text-cyan-700",
-  "降级策略": "bg-amber-100 text-amber-700",
-  "TPM 视角": "bg-violet-100 text-violet-700",
-  "稳定性": "bg-slate-100 text-slate-700",
+  "RAG": "bg-amber-100 text-amber-700",
+  "Prompt Engineering": "bg-pink-100 text-pink-700",
+  "AI-Native Dev": "bg-blue-100 text-blue-700",
+  "Iteration": "bg-orange-100 text-orange-700",
+  "Cursor": "bg-teal-100 text-teal-700",
+  "Campus": "bg-lime-100 text-lime-700",
+  "AI Orchestration": "bg-indigo-100 text-indigo-700",
+  "Spring Boot": "bg-emerald-100 text-emerald-700",
+  "Gemini API": "bg-rose-100 text-rose-700",
+  "Image Gen": "bg-fuchsia-100 text-fuchsia-700",
+  "Browser Use": "bg-cyan-100 text-cyan-700",
 };
 
 function tagClass(tag: string): string {
@@ -32,10 +32,12 @@ function tagClass(tag: string): string {
   <!-- Section heading -->
   <div class="mb-10 lg:mb-14">
     <h2 class="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold text-gray-900">
-      案例
+      <span data-zh>案例</span>
+      <span data-en>Case Studies</span>
     </h2>
     <p class="text-sm sm:text-base font-mono text-gray-400 mt-1">
-      Case Studies
+      <span data-zh>Case Studies</span>
+      <span data-en>案例</span>
     </p>
     <div
       class="w-16 h-1 mt-3 rounded-full"
@@ -43,7 +45,8 @@ function tagClass(tag: string): string {
     >
     </div>
     <p class="mt-4 text-base text-gray-500 max-w-2xl">
-      三个从真实痛点出发的产品实践案例，展示"问题定义 → 关键决策 → 产出闭环"的 AI PM 思维链路。
+      <span data-zh>三个从真实痛点出发的产品实践案例，展示"问题定义 → 关键决策 → 产出闭环"的 AI PM 思维链路。</span>
+      <span data-en>Three product cases grounded in real pain points, demonstrating "Problem Definition → Key Decisions → Deliverable Closure" AI PM thinking.</span>
     </p>
   </div>
 
@@ -67,12 +70,13 @@ function tagClass(tag: string): string {
                     0{index + 1}
                   </span>
                   <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
-                    {cs.name}
+                    <span data-zh>{cs.name}</span>
+                    <span data-en>{cs.nameEn}</span>
                   </h3>
                 </div>
-                <p class="text-xs font-mono text-gray-400 mb-3">{cs.nameEn}</p>
                 <p class="text-base text-gray-600 leading-relaxed font-medium">
-                  {cs.tagline}
+                  <span data-zh>{cs.tagline}</span>
+                  <span data-en>{cs.taglineEn}</span>
                 </p>
                 <div class="flex flex-wrap gap-2 mt-4">
                   {cs.tags.map((tag) => (
@@ -89,7 +93,8 @@ function tagClass(tag: string): string {
                 data-target={`case-detail-${cs.id}`}
                 style={`border-color: ${siteConfig.accentColor}; color: ${siteConfig.accentColor}`}
               >
-                查看详情
+                <span data-zh>查看详情</span>
+                <span data-en>View Details</span>
                 <svg
                   class="toggle-arrow w-4 h-4 transition-transform duration-300"
                   fill="none"
@@ -120,32 +125,49 @@ function tagClass(tag: string): string {
                   style={`color: ${siteConfig.accentColor}`}
                 >
                   <span class="w-5 h-5 rounded-full text-white flex items-center justify-center text-[10px] font-bold" style={`background-color: ${siteConfig.accentColor}`}>1</span>
-                  Context — 概览
+                  <span data-zh>Context — 概览</span>
+                  <span data-en>Context — Overview</span>
                 </h4>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div class="bg-gray-50 rounded-xl p-4">
-                    <p class="text-xs font-mono text-gray-400 mb-1">项目概述</p>
+                    <p class="text-xs font-mono text-gray-400 mb-1">
+                      <span data-zh>项目概述</span>
+                      <span data-en>Summary</span>
+                    </p>
                     <p class="text-sm text-gray-700 leading-relaxed">
-                      {cs.context.summary}
+                      <span data-zh>{cs.context.summary}</span>
+                      <span data-en>{cs.context.summaryEn}</span>
                     </p>
                   </div>
                   <div class="space-y-3">
                     <div class="bg-gray-50 rounded-xl p-4">
-                      <p class="text-xs font-mono text-gray-400 mb-1">核心痛点</p>
+                      <p class="text-xs font-mono text-gray-400 mb-1">
+                        <span data-zh>核心痛点</span>
+                        <span data-en>Pain Point</span>
+                      </p>
                       <p class="text-sm text-gray-700 leading-relaxed">
-                        {cs.context.problem}
+                        <span data-zh>{cs.context.problem}</span>
+                        <span data-en>{cs.context.problemEn}</span>
                       </p>
                     </div>
                     <div class="bg-gray-50 rounded-xl p-4">
-                      <p class="text-xs font-mono text-gray-400 mb-1">用户</p>
+                      <p class="text-xs font-mono text-gray-400 mb-1">
+                        <span data-zh>用户</span>
+                        <span data-en>Users</span>
+                      </p>
                       <p class="text-sm text-gray-700 leading-relaxed">
-                        {cs.context.users}
+                        <span data-zh>{cs.context.users}</span>
+                        <span data-en>{cs.context.usersEn}</span>
                       </p>
                     </div>
                     <div class="bg-gray-50 rounded-xl p-4">
-                      <p class="text-xs font-mono text-gray-400 mb-1">项目阶段</p>
+                      <p class="text-xs font-mono text-gray-400 mb-1">
+                        <span data-zh>项目阶段</span>
+                        <span data-en>Stage</span>
+                      </p>
                       <p class="text-sm text-gray-700 leading-relaxed">
-                        {cs.context.stage}
+                        <span data-zh>{cs.context.stage}</span>
+                        <span data-en>{cs.context.stageEn}</span>
                       </p>
                     </div>
                   </div>
@@ -159,16 +181,19 @@ function tagClass(tag: string): string {
                   style={`color: ${siteConfig.accentColor}`}
                 >
                   <span class="w-5 h-5 rounded-full text-white flex items-center justify-center text-[10px] font-bold" style={`background-color: ${siteConfig.accentColor}`}>2</span>
-                  Decisions — 问题定义与关键决策
+                  <span data-zh>Decisions — 问题定义与关键决策</span>
+                  <span data-en>Decisions — Problem Definition & Key Decisions</span>
                 </h4>
                 <div class="space-y-4">
-                  {cs.decisions.map((d, di) => (
+                  {cs.decisions.map((d) => (
                     <div class="border-l-2 pl-4" style={`border-color: ${siteConfig.accentColor}`}>
                       <h5 class="text-sm font-semibold text-gray-900 mb-1">
-                        {d.title}
+                        <span data-zh>{d.title}</span>
+                        <span data-en>{d.titleEn}</span>
                       </h5>
                       <p class="text-sm text-gray-600 leading-relaxed">
-                        {d.content}
+                        <span data-zh>{d.content}</span>
+                        <span data-en>{d.contentEn}</span>
                       </p>
                     </div>
                   ))}
@@ -182,7 +207,8 @@ function tagClass(tag: string): string {
                   style={`color: ${siteConfig.accentColor}`}
                 >
                   <span class="w-5 h-5 rounded-full text-white flex items-center justify-center text-[10px] font-bold" style={`background-color: ${siteConfig.accentColor}`}>3</span>
-                  Artifacts — 产出文档
+                  <span data-zh>Artifacts — 产出文档</span>
+                  <span data-en>Artifacts — Deliverables</span>
                 </h4>
                 <div class="flex flex-wrap gap-3">
                   {cs.artifacts.map((art) => (
@@ -227,10 +253,11 @@ function tagClass(tag: string): string {
       const arrow = btn.querySelector(".toggle-arrow");
       arrow?.classList.toggle("rotate-180", isHidden);
 
-      const btnEl = btn as HTMLElement;
-      const newLabel = isHidden ? "收起" : "查看详情";
-      const arrowClass = `toggle-arrow w-4 h-4 transition-transform duration-300${isHidden ? " rotate-180" : ""}`;
-      btnEl.innerHTML = `${newLabel}<svg class="${arrowClass}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>`;
+      // Update bilingual button text
+      const zhSpan = btn.querySelector('[data-zh]');
+      const enSpan = btn.querySelector('[data-en]');
+      if (zhSpan) zhSpan.textContent = isHidden ? '收起' : '查看详情';
+      if (enSpan) enSpan.textContent = isHidden ? 'Collapse' : 'View Details';
     });
   });
 </script>

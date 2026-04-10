@@ -10,9 +10,13 @@ import { siteConfig } from "../config";
   <!-- Section heading -->
   <div class="mb-10 lg:mb-14">
     <h2 class="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold text-gray-900">
-      联系
+      <span data-zh>联系</span>
+      <span data-en>Contact</span>
     </h2>
-    <p class="text-sm sm:text-base font-mono text-gray-400 mt-1">Contact</p>
+    <p class="text-sm sm:text-base font-mono text-gray-400 mt-1">
+      <span data-zh>Contact</span>
+      <span data-en>联系</span>
+    </p>
     <div
       class="w-16 h-1 mt-3 rounded-full"
       style={`background-color: ${siteConfig.accentColor}`}
@@ -24,7 +28,8 @@ import { siteConfig } from "../config";
     <!-- Note + CTA -->
     <div class="lg:col-span-5">
       <p class="text-lg text-gray-600 leading-relaxed mb-8">
-        {siteConfig.contact.note}
+        <span data-zh>{siteConfig.contact.note}</span>
+        <span data-en>{siteConfig.contact.noteEn}</span>
       </p>
 
       <!-- Resume download -->
@@ -47,10 +52,12 @@ import { siteConfig } from "../config";
             d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
           ></path>
         </svg>
-        {siteConfig.contact.resumeLabel}
+        <span data-zh>{siteConfig.contact.resumeLabel}</span>
+        <span data-en>{siteConfig.contact.resumeLabelEn}</span>
       </a>
       <p class="text-xs text-gray-400 font-mono">
-        （注：简历为占位链接，替换方式见 README）
+        <span data-zh>（注：简历为占位链接，替换方式见 README）</span>
+        <span data-en>(Note: Resume link is a placeholder. See README for replacement.)</span>
       </p>
     </div>
 
@@ -83,11 +90,13 @@ import { siteConfig } from "../config";
                 </svg>
               </div>
               <div>
-                <p class="text-xs font-mono text-gray-400">邮箱 Email</p>
+                <p class="text-xs font-mono text-gray-400">
+                  <span data-zh>邮箱</span>
+                  <span data-en>Email</span>
+                </p>
                 <p class="text-sm font-medium text-gray-800 group-hover:text-gray-900 break-all">
                   {siteConfig.social.email}
                 </p>
-                <p class="text-[10px] text-gray-400 italic">（替换为真实邮箱）</p>
               </div>
             </a>
           )
@@ -122,7 +131,6 @@ import { siteConfig } from "../config";
                 <p class="text-sm font-medium text-gray-800 group-hover:text-gray-900">
                   Littlefun8
                 </p>
-                <p class="text-[10px] text-gray-400 italic">（替换为真实 GitHub）</p>
               </div>
             </a>
           )
@@ -151,16 +159,16 @@ import { siteConfig } from "../config";
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
-                    d="M8 11v5M8 8v.01M12 16v-5M16 16v-3a2 2 0 1 0-4 0M3 7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4z"
+                    d="M8 11v5M8 8v.01M12 16v-5M16 16v-3a2 2 0 10-4 0M3 7a4 4 0 014-4h10a4 4 0 014 4v10a4 4 0 01-4 4H7a4 4 0 01-4-4z"
                   />
                 </svg>
               </div>
               <div>
                 <p class="text-xs font-mono text-gray-400">LinkedIn</p>
                 <p class="text-sm font-medium text-gray-800 group-hover:text-gray-900">
-                  查看主页
+                  <span data-zh>查看主页</span>
+                  <span data-en>View Profile</span>
                 </p>
-                <p class="text-[10px] text-gray-400 italic">（替换为真实 LinkedIn）</p>
               </div>
             </a>
           )
@@ -190,11 +198,14 @@ import { siteConfig } from "../config";
             </svg>
           </div>
           <div>
-            <p class="text-xs font-mono text-gray-400">微信 WeChat</p>
-            <p class="text-sm font-medium text-gray-800 group-hover:text-gray-900">
-              点击查看二维码
+            <p class="text-xs font-mono text-gray-400">
+              <span data-zh>微信</span>
+              <span data-en>WeChat</span>
             </p>
-            <p class="text-[10px] text-gray-400 italic">（占位，替换真实二维码）</p>
+            <p class="text-sm font-medium text-gray-800 group-hover:text-gray-900">
+              <span data-zh>点击查看二维码</span>
+              <span data-en>Tap to view QR Code</span>
+            </p>
           </div>
         </div>
       </div>
@@ -213,7 +224,10 @@ import { siteConfig } from "../config";
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
-          <h3 class="text-base font-bold text-gray-900 mb-1 text-center">微信扫码联系</h3>
+          <h3 class="text-base font-bold text-gray-900 mb-1 text-center">
+            <span data-zh>微信扫码联系</span>
+            <span data-en>Scan WeChat QR Code</span>
+          </h3>
           <p class="text-xs text-gray-400 text-center mb-4">WeChat QR Code</p>
           <div class="w-48 h-48 mx-auto bg-gray-100 rounded-xl flex flex-col items-center justify-center text-gray-400 text-sm text-center gap-2">
             <svg class="w-12 h-12 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -222,11 +236,15 @@ import { siteConfig } from "../config";
               <rect x="3" y="14" width="7" height="7" rx="1" stroke-width="2"/>
               <path d="M14 14h.01M18 14h.01M14 18h.01M18 18h.01" stroke-width="2" stroke-linecap="round"/>
             </svg>
-            <span class="text-xs">二维码占位图</span>
-            <span class="text-[10px] text-gray-300">替换为真实二维码</span>
+            <span class="text-xs">
+              <span data-zh>二维码占位图</span>
+              <span data-en>QR Code Placeholder</span>
+            </span>
           </div>
           <p class="text-[10px] text-gray-400 mt-4 text-center font-mono">
-            将真实二维码放至<br/><code>/public/assets/wechat-qr.png</code>
+            <span data-zh>将真实二维码放至<br/></span>
+            <span data-en>Place real QR code at<br/></span>
+            <code>/public/assets/wechat-qr.png</code>
           </p>
         </div>
       </div>

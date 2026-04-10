@@ -3,3 +3,13 @@
 body {
   font-family: 'IBM Plex Mono', monospace;
 }
+
+/* i18n: language toggle */
+[data-lang="zh"] [data-en] { display: none !important; }
+[data-lang="en"] [data-zh] { display: none !important; }
+
+/* Fix for inline elements that need display: inline */
+[data-lang="zh"] span[data-en] { display: none !important; }
+[data-lang="zh"] a[data-en] { display: none !important; }
+[data-lang="en"] span[data-zh] { display: none !important; }
+[data-lang="en"] a[data-zh] { display: none !important; }

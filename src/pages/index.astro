@@ -1,20 +1,20 @@
 ---
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
-import About from "../components/About.astro";
-import Projects from "../components/Projects.astro";
-import Experience from "../components/Experience.astro";
 import Education from "../components/Education.astro";
+import CaseStudies from "../components/CaseStudies.astro";
+import ThinkingVault from "../components/ThinkingVault.astro";
+import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
 import { siteConfig } from "../config";
 import "../styles/global.css";
 ---
 
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={siteConfig.description} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,17 +23,22 @@ import "../styles/global.css";
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
       rel="stylesheet"
     />
-    <title>{siteConfig.name} - {siteConfig.title}</title>
+    <title>L — AI PM / TPM 作品集</title>
   </head>
   <body>
     <Header />
-    <section>
+    <main>
+      <!-- 1. 首页 Home -->
       <Hero />
-      <About />
-      <Projects />
-      <Experience />
+      <!-- 2. 教育与成果 Education & Achievements -->
       <Education />
-    </section>
+      <!-- 3. 案例 Case Studies -->
+      <CaseStudies />
+      <!-- 4. 思考库 Thinking Vault -->
+      <ThinkingVault />
+      <!-- 5. 联系 Contact -->
+      <Contact />
+    </main>
     <Footer />
   </body>
 </html>

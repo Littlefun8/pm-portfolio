@@ -1,0 +1,53 @@
+---
+import { siteConfig } from "../config";
+
+const categories = siteConfig.skillsMatrix;
+---
+
+<section
+  id="skills"
+  class="p-8 sm:p-12 md:p-16 lg:p-24 bg-white"
+  style={`--accent-color: ${siteConfig.accentColor}`}
+>
+  <!-- Section heading -->
+  <div class="mb-10 lg:mb-14">
+    <h2 class="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold text-gray-900">
+      <span data-zh>技能</span>
+      <span data-en>Skills</span>
+    </h2>
+    <p class="text-sm sm:text-base font-mono text-gray-400 mt-1">
+      <span data-zh>Skills Matrix</span>
+      <span data-en>技能矩阵</span>
+    </p>
+    <div
+      class="w-16 h-1 mt-3 rounded-full"
+      style={`background-color: ${siteConfig.accentColor}`}
+    ></div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {categories.map((cat) => (
+      <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
+        <div class="flex items-center gap-2 mb-4">
+          <div
+            class="w-2 h-2 rounded-full flex-shrink-0"
+            style={`background-color: ${siteConfig.accentColor}`}
+          ></div>
+          <h3 class="text-sm font-bold font-mono uppercase tracking-widest text-gray-900">
+            <span data-zh>{cat.category}</span>
+            <span data-en>{cat.categoryEn}</span>
+          </h3>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          {cat.skills.map((skill) => (
+            <span
+              class="px-3 py-1 text-xs font-mono rounded-lg bg-white border border-gray-200 text-gray-700 hover:border-gray-400 transition-colors duration-200"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

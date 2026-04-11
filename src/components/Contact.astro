@@ -1,5 +1,10 @@
 ---
 import { siteConfig } from "../config";
+const base = import.meta.env.BASE_URL;
+const joinWithBase = (path: string) => {
+  const normalizedBase = base.endsWith("/") ? base : `${base}/`;
+  return `${normalizedBase}${path.replace(/^\/+/, "")}`;
+};
 ---
 
 <section
@@ -32,33 +37,27 @@ import { siteConfig } from "../config";
         <span data-en>{siteConfig.contact.noteEn}</span>
       </p>
 
-      <!-- Resume download -->
-      <a
-        href={siteConfig.contact.resumeUrl}
-        download
-        class="inline-flex items-center gap-3 px-6 py-4 rounded-xl font-semibold text-white transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5 hover:shadow-lg mb-6"
-        style={`background-color: ${siteConfig.accentColor}`}
-      >
-        <svg
-          class="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-          ></path>
-        </svg>
-        <span data-zh>{siteConfig.contact.resumeLabel}</span>
-        <span data-en>{siteConfig.contact.resumeLabelEn}</span>
-      </a>
-      <p class="text-xs text-gray-400 font-mono">
-        <span data-zh>（注：简历为占位链接，替换方式见 README）</span>
-        <span data-en>(Note: Resume link is a placeholder. See README for replacement.)</span>
-      </p>
+      <!-- Resume downloads -->
+      <div class="space-y-3 mb-6">
+        <p class="text-sm font-mono text-gray-500 mb-3">
+          <span data-zh>选择目标岗位下载对应简历 ↓</span>
+          <span data-en>Select a role to download the matching resume ↓</span>
+        </p>
+        {siteConfig.contact.resumes.map((resume) => (
+          <a
+            href={joinWithBase(resume.url)}
+            download
+            class="flex items-center gap-3 px-5 py-3 rounded-xl font-semibold text-white transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5 hover:shadow-lg w-full"
+            style={`background-color: ${siteConfig.accentColor}`}
+          >
+            <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            <span data-zh>{resume.label}</span>
+            <span data-en>{resume.labelEn}</span>
+          </a>
+        ))}
+      </div>
     </div>
 
     <!-- Contact channels -->
@@ -229,23 +228,9 @@ import { siteConfig } from "../config";
             <span data-en>Scan WeChat QR Code</span>
           </h3>
           <p class="text-xs text-gray-400 text-center mb-4">WeChat QR Code</p>
-          <div class="w-48 h-48 mx-auto bg-gray-100 rounded-xl flex flex-col items-center justify-center text-gray-400 text-sm text-center gap-2">
-            <svg class="w-12 h-12 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <rect x="3" y="3" width="7" height="7" rx="1" stroke-width="2"/>
-              <rect x="14" y="3" width="7" height="7" rx="1" stroke-width="2"/>
-              <rect x="3" y="14" width="7" height="7" rx="1" stroke-width="2"/>
-              <path d="M14 14h.01M18 14h.01M14 18h.01M18 18h.01" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            <span class="text-xs">
-              <span data-zh>二维码占位图</span>
-              <span data-en>QR Code Placeholder</span>
-            </span>
+          <div class="w-48 h-48 mx-auto rounded-xl overflow-hidden">
+            <img src={joinWithBase("assets/wechat-qr.png")} alt="微信二维码" class="w-full h-full object-contain" />
           </div>
-          <p class="text-[10px] text-gray-400 mt-4 text-center font-mono">
-            <span data-zh>将真实二维码放至<br/></span>
-            <span data-en>Place real QR code at<br/></span>
-            <code>/public/assets/wechat-qr.png</code>
-          </p>
         </div>
       </div>
     </div>

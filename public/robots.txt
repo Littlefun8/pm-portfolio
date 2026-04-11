@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://littlefun8.github.io/pm-portfolio/sitemap-index.xml

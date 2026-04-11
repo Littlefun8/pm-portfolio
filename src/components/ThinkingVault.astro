@@ -8,7 +8,7 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
 
 <section
   id="thinking-vault"
-  class="p-8 sm:p-12 md:p-16 lg:p-24"
+  class="p-8 sm:p-12 md:p-16 lg:p-24 bg-gray-50"
   style={`--accent-color: ${siteConfig.accentColor}`}
 >
   <!-- Section heading -->
@@ -33,7 +33,7 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
   </div>
 
   <!-- Tab navigation -->
-  <div class="flex gap-1 mb-8 bg-gray-100 rounded-xl p-1 w-fit">
+  <div class="flex gap-1 mb-8 bg-gray-200 rounded-xl p-1 w-fit">
     <button
       id="tab-flashcards"
       class="vault-tab px-5 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-white shadow-sm text-gray-900"
@@ -116,84 +116,90 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
     </div>
   </div>
 
-  <!-- Blog panel -->
+  <!-- Blog panel with developerFolio-style cards -->
   <div id="panel-blog" class="hidden">
-    <div class="space-y-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {
-        blogs.map((blog) => (
-          <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-md transition-all duration-300">
-            <div class="p-6 sm:p-8">
-              <div class="flex flex-wrap items-center gap-2 mb-3">
-                <span class="text-xs font-mono text-gray-400">{blog.date}</span>
-                {blog.tags.map((tag) => (
-                  <span class="px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-[11px] font-mono">
-                    #{tag}
-                  </span>
-                ))}
+        blogs.map((blog, index) => (
+          <div class="tv-blog-card tv-reveal">
+            <div
+              class={`df-blog-card relative rounded-xl overflow-hidden cursor-pointer h-52 border border-gray-200`}
+              style={`--card-accent: ${siteConfig.accentColor}; transition-delay: ${Math.min(index * 80, 220)}ms`}
+              data-blog-id={blog.id}
+            >
+              {/* The ::before pseudo-element creates the expanding circle effect */}
+              <div class="relative z-10 h-full flex flex-col justify-between p-5">
+                <div>
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="text-xs font-mono text-gray-400">{blog.date}</span>
+                  </div>
+                  <h3 class="df-blog-title text-base font-bold text-gray-900 leading-snug mb-2">
+                    <span data-zh>{blog.title}</span>
+                    <span data-en>{blog.titleEn}</span>
+                  </h3>
+                  <p class="df-blog-desc text-sm text-gray-600 leading-relaxed line-clamp-3">
+                    <span data-zh>{blog.summary}</span>
+                    <span data-en>{blog.summaryEn}</span>
+                  </p>
+                </div>
+
+                {/* Tags */}
+                <div class="flex flex-wrap gap-1.5 mt-auto">
+                  {blog.tags.map((tag) => (
+                    <span class="df-blog-tag px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-[10px] font-mono transition-colors duration-300">
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <h3 class="text-xl font-bold text-gray-900 mb-1">
-                <span data-zh>{blog.title}</span>
-                <span data-en>{blog.titleEn}</span>
-              </h3>
-              <p class="text-sm text-gray-600 leading-relaxed mb-5">
-                <span data-zh>{blog.summary}</span>
-                <span data-en>{blog.summaryEn}</span>
-              </p>
 
-              <button
-                class="blog-toggle inline-flex items-center gap-2 text-sm font-medium transition-colors"
-                data-target={`blog-content-${blog.id}`}
-                style={`color: ${siteConfig.accentColor}`}
-              >
-                <span data-zh>展开全文</span>
-                <span data-en>Expand</span>
-                <svg
-                  class="blog-arrow w-4 h-4 transition-transform duration-300"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
-
-              <div id={`blog-content-${blog.id}`} class="hidden mt-5 space-y-5">
-                {blog.content.map((section) => (
-                  <div class="border-l-2 pl-4" style={`border-color: ${siteConfig.accentColor}`}>
-                    <h5 class="text-sm font-semibold text-gray-900 mb-2">
-                      <span data-zh>{section.section}</span>
-                      <span data-en>{section.sectionEn}</span>
-                    </h5>
-                    <p class="text-sm text-gray-600 leading-relaxed">
-                      <span data-zh>{section.text}</span>
-                      <span data-en>{section.textEn}</span>
-                    </p>
-                  </div>
-                ))}
-
-                {blog.relatedCase && (
-                  <div class="mt-4 pt-4 border-t border-gray-100">
-                    <a
-                      href={`#case-studies`}
-                      class="inline-flex items-center gap-1.5 text-xs font-mono transition-colors"
-                      style={`color: ${siteConfig.accentColor}`}
-                    >
-                      <span data-zh>→ 查看相关案例</span>
-                      <span data-en>→ View Related Case</span>
-                    </a>
-                  </div>
-                )}
+              {/* Go corner */}
+              <div class="go-corner">
+                <div class="go-arrow">&rarr;</div>
               </div>
             </div>
           </div>
         ))
       }
     </div>
+
+    <!-- Expandable blog content (shown when a blog card is clicked) -->
+    {
+      blogs.map((blog) => (
+        <div
+          id={`blog-content-${blog.id}`}
+          class="blog-content hidden mt-4 bg-white rounded-xl border border-gray-200 p-6 max-h-0 overflow-hidden opacity-0 transition-all duration-300"
+        >
+          <div class="space-y-5">
+            {blog.content.map((section) => (
+              <div class="border-l-2 pl-4" style={`border-color: ${siteConfig.accentColor}`}>
+                <h5 class="text-sm font-semibold text-gray-900 mb-2">
+                  <span data-zh>{section.section}</span>
+                  <span data-en>{section.sectionEn}</span>
+                </h5>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  <span data-zh>{section.text}</span>
+                  <span data-en>{section.textEn}</span>
+                </p>
+              </div>
+            ))}
+
+            {blog.relatedCase && (
+              <div class="mt-4 pt-4 border-t border-gray-100">
+                <a
+                  href={`#case-studies`}
+                  class="inline-flex items-center gap-1.5 text-xs font-mono transition-colors"
+                  style={`color: ${siteConfig.accentColor}`}
+                >
+                  <span data-zh>&rarr; 查看相关案例</span>
+                  <span data-en>&rarr; View Related Case</span>
+                </a>
+              </div>
+            )}
+          </div>
+        </div>
+      ))
+    }
 
     <!-- Placeholder note -->
     <div class="mt-6 rounded-xl border border-dashed border-gray-300 p-4 text-center">
@@ -210,6 +216,8 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
 </section>
 
 <script>
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   // Tab switching
   const tabs = document.querySelectorAll(".vault-tab");
   const panels: Record<string, HTMLElement | null> = {
@@ -233,6 +241,10 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
       Object.entries(panels).forEach(([key, panel]) => {
         if (panel) panel.classList.toggle("hidden", key !== target);
       });
+
+      if (target === "blog") {
+        requestAnimationFrame(revealBlogCards);
+      }
     });
   });
 
@@ -264,26 +276,172 @@ const allDomains = [...new Set(flashcards.map((fc) => fc.domain))];
     });
   });
 
-  // Blog expand/collapse
-  document.querySelectorAll(".blog-toggle").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const btnEl = btn as HTMLElement;
-      const targetId = btnEl.dataset.target;
-      if (!targetId) return;
-      const content = document.getElementById(targetId);
+  // Blog card click → expand content below
+  document.querySelectorAll(".df-blog-card").forEach((card) => {
+    card.addEventListener("click", () => {
+      const blogId = (card as HTMLElement).dataset.blogId;
+      if (!blogId) return;
+      const content = document.getElementById(`blog-content-${blogId}`);
       if (!content) return;
 
-      const isHidden = content.classList.contains("hidden");
-      content.classList.toggle("hidden", !isHidden);
+      // Close all other expanded blogs
+      document.querySelectorAll(".blog-content").forEach((el) => {
+        if (el.id !== `blog-content-${blogId}`) {
+          el.classList.add("hidden", "max-h-0", "opacity-0");
+          el.classList.remove("mt-4", "blog-expanded");
+          (el as HTMLElement).style.maxHeight = "0px";
+        }
+      });
 
-      const arrow = btn.querySelector(".blog-arrow");
-      arrow?.classList.toggle("rotate-180", isHidden);
+      const isExpanded = content.classList.contains("blog-expanded");
+      content.classList.toggle("blog-expanded", !isExpanded);
+      content.classList.toggle("hidden", isExpanded);
+      content.classList.toggle("max-h-0", isExpanded);
+      content.classList.toggle("opacity-0", isExpanded);
 
-      // Update bilingual button text
-      const zhSpan = btn.querySelector('[data-zh]');
-      const enSpan = btn.querySelector('[data-en]');
-      if (zhSpan) zhSpan.textContent = isHidden ? '收起' : '展开全文';
-      if (enSpan) enSpan.textContent = isHidden ? 'Collapse' : 'Expand';
+      if (!isExpanded) {
+        content.style.maxHeight = `${content.scrollHeight}px`;
+        // Scroll into view
+        setTimeout(() => {
+          content.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }, 100);
+      } else {
+        content.style.maxHeight = "0px";
+      }
+
+      content.addEventListener(
+        "transitionend",
+        () => {
+          if (content.classList.contains("blog-expanded")) {
+            content.style.maxHeight = "none";
+          }
+        },
+        { once: true }
+      );
     });
   });
+
+  // Staggered reveal animation for blog cards
+  const revealBlogCards = () => {
+    const cards = Array.from(document.querySelectorAll(".tv-blog-card"));
+    cards.forEach((card, index) => {
+      if (prefersReducedMotion) {
+        card.classList.add("is-visible");
+        return;
+      }
+      window.setTimeout(() => {
+        card.classList.add("is-visible");
+      }, Math.min(index * 70, 260));
+    });
+  };
+
+  const panelBlog = document.getElementById("panel-blog");
+  if (panelBlog && "IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries, io) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          revealBlogCards();
+          io.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(panelBlog);
+  }
+
+  const blogTab = document.getElementById("tab-blog");
+  blogTab?.addEventListener("click", () => {
+    requestAnimationFrame(revealBlogCards);
+  });
 </script>
+
+<style>
+  /* Reveal animation */
+  .tv-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .tv-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* developerFolio-style blog card ::before expanding circle effect */
+  .df-blog-card::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: -16px;
+    right: -16px;
+    background: var(--card-accent);
+    height: 32px;
+    width: 32px;
+    border-radius: 32px;
+    transform: scale(1);
+    transform-origin: 50% 50%;
+    transition: transform 0.4s ease-out;
+  }
+
+  .df-blog-card:hover::before {
+    transform: scale(30);
+  }
+
+  .df-blog-card:hover .df-blog-title {
+    color: white;
+  }
+
+  .df-blog-card:hover .df-blog-desc {
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+
+  .df-blog-card:hover .df-blog-tag {
+    background: rgba(255, 255, 255, 0.25) !important;
+    color: white !important;
+  }
+
+  /* Go corner arrow */
+  .go-corner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    z-index: 20;
+    border-radius: 0 12px 0 32px;
+  }
+
+  .go-arrow {
+    margin-top: -4px;
+    margin-right: -4px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .blog-content {
+    will-change: max-height, opacity;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tv-reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .df-blog-card::before {
+      transition-duration: 0ms !important;
+    }
+
+    .blog-content {
+      transition-duration: 0ms !important;
+    }
+  }
+</style>

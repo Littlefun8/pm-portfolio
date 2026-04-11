@@ -331,6 +331,67 @@ export const siteConfig = {
         },
       ],
     },
+    {
+      id: "n8n-ocr-workflow",
+      name: "n8n OCR+评分自动化工作流",
+      nameEn: "n8n OCR + Scoring Automated Workflow",
+      tagline: "从文件上传到评分回写全流程自动化，单次批改从 5-10 分钟缩短至 30 秒内",
+      taglineEn:
+        "End-to-end automation from file upload to scoring write-back, cutting per-correction time from 5–10 min to under 30 sec",
+      tags: ["n8n", "工作流编排", "OCR", "飞书多维表格", "数据工程"],
+      context: {
+        summary:
+          "基于 n8n 搭建的 OCR + LLM 评分端到端自动化工作流。集成飞书多维表格、火山引擎视觉识别 API 和硅基流动评分 API，将文件上传 → 图像转码 → 文本识别 → LLM 评分 → 结果回写全流程自动化。",
+        summaryEn:
+          "End-to-end OCR + LLM scoring automated workflow built on n8n. Integrates Feishu Bitable, Volcano Engine Vision API, and SiliconFlow scoring API to automate the full pipeline: file upload → image transcoding → OCR → LLM scoring → result write-back.",
+        problem:
+          "核心痛点：DearLiHua 项目的批改流程需要人工触发多个步骤（上传图片 → 等待 OCR → 复制文本 → 调用评分 → 手动记录结果），效率瓶颈明显。",
+        problemEn:
+          "Core pain point: DearLiHua's grading flow required manually triggering multiple steps (upload → wait for OCR → copy text → call scoring → log results), creating a clear efficiency bottleneck.",
+        users:
+          "目标用户：高中英语教师（通过飞书多维表格批量提交作业，自动获取批改结果）",
+        usersEn:
+          "Primary: High-school English teachers (batch-submit essays via Feishu Bitable, auto-receive grading results)",
+        stage:
+          "阶段：工作流已跑通端到端流程，正在优化 OCR 识别噪声处理和数据字段映射",
+        stageEn:
+          "Stage: End-to-end pipeline operational, iterating on OCR noise handling and field mapping",
+      },
+      decisions: [
+        {
+          title: "工作流编排架构",
+          titleEn: "Workflow Orchestration Architecture",
+          content:
+            "基于 n8n 搭建 5 阶段串行流水线：飞书触发器 → 文件下载 & 图像转码 → 火山引擎 OCR 识别 → 硅基流动 LLM 评分 → 结果回写飞书多维表格。每个阶段独立配置错误处理和超时策略。",
+          contentEn:
+            "Built a 5-stage sequential pipeline on n8n: Feishu trigger → file download & image transcoding → Volcano Engine OCR → SiliconFlow LLM scoring → write results back to Feishu Bitable. Each stage has independent error handling and timeout policies.",
+        },
+        {
+          title: "数据工程：节点间数据清洗",
+          titleEn: "Data Engineering: Inter-node Data Cleaning",
+          content:
+            "使用 Code 节点进行节点间数据清洗和格式转换，结合 Merge 节点实现多数据源合并，Aggregate/Filter 节点处理数据筛选。重点解决了 OCR 识别噪声（手写体误识别）和字段映射不一致等工程问题。",
+          contentEn:
+            "Used Code nodes for inter-node data cleaning and format conversion, Merge nodes for multi-source data consolidation, Aggregate/Filter nodes for data screening. Solved key engineering challenges including OCR noise from handwriting variations and inconsistent field mapping.",
+        },
+        {
+          title: "集成策略：多 API 协同",
+          titleEn: "Integration Strategy: Multi-API Coordination",
+          content:
+            "飞书多维表格作为数据入口和结果展示层，火山引擎提供 OCR 识别能力，硅基流动提供 LLM 评分能力。三个 API 通过 n8n 工作流串联，实现了零人工干预的自动化批改闭环。",
+          contentEn:
+            "Feishu Bitable as data entry and result display layer, Volcano Engine for OCR capability, SiliconFlow for LLM scoring. Three APIs chained via n8n workflow, achieving a zero-manual-intervention automated grading loop.",
+        },
+      ],
+      artifacts: [
+        {
+          type: "代码",
+          label: "n8n 工作流",
+          url: "#todo-n8n-workflow-export",
+          note: "待替换为 n8n 工作流导出 JSON / 截图",
+        },
+      ],
+    },
   ],
   thinkingVault: {
     flashcards: [
@@ -476,12 +537,98 @@ export const siteConfig = {
       },
     ],
   },
+  metricsBar: [
+    {
+      value: "Top 1%",
+      label: "专业排名",
+      labelEn: "Major Ranking",
+      source: "JUFE Software Engineering",
+    },
+    {
+      value: "93%",
+      label: "评分准确率",
+      labelEn: "Scoring Accuracy",
+      source: "DearLiHua",
+    },
+    {
+      value: "60%",
+      label: "开发效率提升",
+      labelEn: "Dev Efficiency Boost",
+      source: "AI-Native Dev",
+    },
+    {
+      value: "4项",
+      label: "国家级竞赛奖",
+      labelEn: "National Awards",
+      source: "累计获奖",
+    },
+  ],
+  skillsMatrix: [
+    {
+      category: "产品方法",
+      categoryEn: "Product Methods",
+      skills: [
+        "用户调研",
+        "PRD",
+        "竞品分析",
+        "Axure 原型",
+        "MVP 验证",
+        "Scrum",
+        "RICE",
+      ],
+    },
+    {
+      category: "AI / LLM",
+      categoryEn: "AI / LLM",
+      skills: [
+        "LangChain Agent",
+        "LangGraph",
+        "RAG",
+        "Prompt Engineering",
+        "CoT / Few-shot",
+        "n8n 工作流",
+      ],
+    },
+    {
+      category: "开发",
+      categoryEn: "Development",
+      skills: [
+        "Python",
+        "TypeScript",
+        "FastAPI",
+        "Spring Boot",
+        "微信小程序",
+        "Docker",
+      ],
+    },
+    {
+      category: "工具",
+      categoryEn: "Tools",
+      skills: [
+        "Cursor",
+        "Claude Code",
+        "Dify",
+        "Git",
+        "ChromaDB",
+        "Cloudflare",
+      ],
+    },
+  ],
   contact: {
     note: "欢迎招聘官、产品同行和对 AI PM 感兴趣的朋友联系。",
     noteEn:
       "Open to connect with recruiters, product peers, and anyone interested in AI PM.",
-    resumeUrl: "/assets/resume-placeholder.pdf",
-    resumeLabel: "下载简历 (PDF)",
-    resumeLabelEn: "Download Resume (PDF)",
+    resumes: [
+      {
+        label: "AI 产品经理",
+        labelEn: "AI Product Manager",
+        url: "/assets/resume_ai_product_manager.md",
+      },
+      {
+        label: "技术产品经理",
+        labelEn: "Technical PM",
+        url: "/assets/resume_tech_product_manager.md",
+      },
+    ],
   },
 };

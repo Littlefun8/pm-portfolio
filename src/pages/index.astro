@@ -1,8 +1,12 @@
 ---
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
+import MetricsBar from "../components/MetricsBar.astro";
+import WhatIDo from "../components/WhatIDo.astro";
 import Education from "../components/Education.astro";
+import SkillsMatrix from "../components/SkillsMatrix.astro";
 import CaseStudies from "../components/CaseStudies.astro";
+import OpenSourceProjects from "../components/OpenSourceProjects.astro";
 import ThinkingVault from "../components/ThinkingVault.astro";
 import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
@@ -17,21 +21,52 @@ import "../styles/global.css";
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={siteConfig.description} />
+    <link rel="canonical" href="https://littlefun8.github.io/pm-portfolio/" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="徐帆 XuFan — AI PM / TPM" />
+    <meta property="og:description" content={siteConfig.descriptionEn} />
+    <meta property="og:url" content="https://littlefun8.github.io/pm-portfolio/" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="徐帆 XuFan — AI PM / TPM" />
+    <meta name="twitter:description" content={siteConfig.descriptionEn} />
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "徐帆",
+      "alternateName": "XuFan",
+      "url": "https://littlefun8.github.io/pm-portfolio/",
+      "jobTitle": "AI Product Manager",
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "江西财经大学"
+      },
+      "sameAs": [
+        "https://github.com/Littlefun8",
+      ]
+    })} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <title data-zh>徐帆 — AI PM / TPM 作品集</title>
-    <title data-en>XuFan — AI PM / TPM Portfolio</title>
+    <title>徐帆 — AI PM / TPM 作品集 | XuFan — AI PM / TPM Portfolio</title>
   </head>
   <body>
     <Header />
     <main>
       <Hero />
+      <MetricsBar />
       <Education />
+      <WhatIDo />
+      <SkillsMatrix />
       <CaseStudies />
+      <OpenSourceProjects />
       <ThinkingVault />
       <Contact />
     </main>
